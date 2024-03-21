@@ -20,7 +20,6 @@ async def create_prompt(request: Request, prompt: Prompt = Body(...)):
 @router.get("/", response_description="List all prompts", response_model=List[Prompt])
 async def list_prompts(request: Request):
     prompts = list(request.app.database["prompts"].find())
-    print("prompts", prompts)
     if not prompts:
         raise HTTPException(status_code=404, detail="No prompts found")
     return prompts
@@ -32,9 +31,26 @@ async def get_prompt(request: Request, id: str):
     if not prompt:
         raise HTTPException(status_code=404, detail="Prompt not found")
 
-# @router.put("/{id}", response_description="Update a prompt", response_model=Prompt)
-# async def update_prompt(request: Request, id: str, prompt_update: PromptUpdate = Body(...)):
-#     prompt
+
+@router.put("/{id}", response_description="Update a prompt", response_model=Prompt)
+async def update_prompt(id: str, request: Request, prompt: PromptUpdate = Body(...)):
+    prompt = {k: v for k, v in prompt.dict().items() if v is not None}
+    if len(prompt) >= 1:
+        update_result = request.app.database["prompts"].update_one(
+            {"_id": id}, {"$set": prompt}
+        )
+
+        if update_result.modified_count == 0:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND, detail=f"Prompt with ID {id} not found")
+
+    if (
+        existing_prompt := request.app.database["prompts"].find_one({"_id": id})
+    ) is not None:
+        return existing_prompt
+
+    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                        detail=f"Promopt with ID {id} not found")
 
 
 @router.delete("/{id}", response_description="Delete a prompt")
