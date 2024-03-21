@@ -31,9 +31,7 @@ app.add_middleware(
 def startup_db_client():
     app.mongodb_client = MongoClient(
         config["CONNECTION_STRING"])
-    print("connection name:", config["CONNECTION_STRING"])
     app.database = app.mongodb_client[config["DB_NAME"]]
-    print("DB name:", config["DB_NAME"])
     print("Connected to MongoDB database")
 
 
