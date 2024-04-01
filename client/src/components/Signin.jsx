@@ -4,6 +4,8 @@ import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
 import { auth } from "../firebase"
 import { useNavigate } from "react-router-dom";
 import signinwithgoogle from "../static/images/avatars/signinwithgoogle.png"
+// import { NavigationContainer } from '@react-navigation/native'; // For React Navigation
+
 
 const Signin = () => {
 
@@ -20,7 +22,9 @@ const Signin = () => {
                 // The signed-in user info.
                 const user = result.user;
                 console.log("user", user);
-                navigate("/");
+                const profilePicUrl = user.photoURL;
+                // console.log('Profile picture URL:', profilePicUrl);
+                // navigate("/", { someProp: "value" });
 
                 // ...
             }).catch((error) => {
