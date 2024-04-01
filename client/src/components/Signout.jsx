@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import { onAuthStateChanged, signOut } from 'firebase/auth'
-import { Grid, Button } from '@mui/material'
+import { Button } from '@mui/material'
 import { auth } from "../firebase"
 
 const Signout = () => {
@@ -36,9 +36,8 @@ const Signout = () => {
 
     return (
         <div>
-            <Grid sx={{ ml: 10 }}>
-                {authUser ? <><p>{`Signed in as ${authUser.email}`}</p><Button variant="contained" onClick={userSignout}>Sign Out</Button></> : <p></p>}
-            </Grid>
+                {/* {authUser ? <><p>{`Signed in as ${authUser.email}`}</p><Button variant="contained" onClick={userSignout}>Sign Out</Button></> : <p></p>} */}
+                <Button variant="contained" sx={{ borderRadius: 10 }} onClick={userSignout}>Sign Out</Button>
         </div>
     )
 }
