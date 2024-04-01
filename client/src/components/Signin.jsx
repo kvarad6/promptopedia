@@ -24,7 +24,8 @@ const Signin = () => {
                 console.log("user", user);
                 const profilePicUrl = user.photoURL;
                 // console.log('Profile picture URL:', profilePicUrl);
-                // navigate("/", { someProp: "value" });
+                navigate("/", { someProp: "value" });
+                navigate("/");
 
                 // ...
             }).catch((error) => {
