@@ -3,6 +3,7 @@ import { Box } from '@mui/material';
 import { Routes, Route } from 'react-router-dom';
 import Home from './components/Home';
 import Signin from './components/Signin';
+import CreatePost from './components/CreatePost';
 
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="signin" element={<Signin />} />
+          <Route path="create-post" element={<CreatePost />} />
         </Routes>
       </Box>
     </div>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Typography, Grid, TextField, IconButton } from '@mui/material'
+import { Typography, Grid, TextField, IconButton, Input, InputLabel } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search';
 
 
@@ -14,7 +14,7 @@ const SearchBar = ({ onSearch }) => {
   };
 
   return (
-    <Grid sx={{display: 'flex', flexDirection: 'row', justifyContent: 'center', mt: 5}}> 
+    <Grid sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', mt: 5 }}>
       <form noValidate autoComplete="off">
         <TextField
           id="search"
@@ -32,7 +32,6 @@ const SearchBar = ({ onSearch }) => {
         />
       </form>
     </Grid>
-    
   )
 }
 
