@@ -7,14 +7,14 @@ import Signin from './components/Signin';
 
 function App() {
   return (
-    <>
-      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 10, backgroundColor: '#389194', height:"100vh"}}>
+    <div className="background-image">
+      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 10, height: "100vh" }}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="signin" element={<Signin />} />
         </Routes>
       </Box>
-    </>
+    </div>
   );
 }
 

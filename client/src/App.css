@@ -32,7 +32,16 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+.background-image {
+  background-image: url("./static/images/bg/bg.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  /* Or desired height */
 }
