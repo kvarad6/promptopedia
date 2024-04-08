@@ -1,11 +1,14 @@
 {
-    "App" : {
+    "App": {
         "BaseDir": "{basePath}",
-        "Mode" : 0,
-        "Host" : "0.0.0.0",
-        "Port" : 5002
+        "Mode": 0,
+        "Host": "0.0.0.0",
+        "Port": 8000
     },
-    "Database":{
-        
+    "Database": {
+        "CollectionName": "promptsCollection"
+    },
+    "GCP": {
+        "Credentials": "config/promptopedia-credentials.json"
     }
 }

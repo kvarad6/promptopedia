@@ -31,12 +31,18 @@ const Home = () => {
                     </Grid>
                 </Grid>
             </Grid>
-            <Grid sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3, mt: 20 }}>
-                <Typography variant='h3' sx={{ color: 'white' }}>Discover & Share AI-Powered Prompts</Typography>
-                <Typography variant='h6' sx={{ color: 'white' }}>Promptopia is an open-source AI prompting tool for modern world to discover, create and share creative prompts</Typography>
+            <Grid sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, mt: 20 }}>
+                <Grid item xs={4}>
+                    <Typography variant='h3' sx={{ color: 'white' }}>Discover & Share AI-Powered Prompts</Typography>
+                </Grid>
+                <Grid item xs={4}>
+                    <Typography variant='h6' sx={{ color: 'white' }}>Promptopia is an open-source AI prompting tool for modern world to discover, create and share creative prompts</Typography>
+                </Grid>
+                <Grid item xs={4}>
+                    <Posts />
+                </Grid>
             </Grid>
-            <SearchBar />
-            <Posts />
+            {/* <SearchBar /> */}
         </div>
     )
 }

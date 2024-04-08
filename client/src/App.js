@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import Home from './components/Home';
 import Signin from './components/Signin';
 import CreatePost from './components/CreatePost';
+import Posts from './components/Posts'
 
 
 function App() {
@@ -13,7 +14,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="signin" element={<Signin />} />
-          <Route path="create-post" element={<CreatePost />} />
+          <Route path="/create-post" element={<CreatePost />} />
+          <Route path="/posts" element={<Posts />} />
         </Routes>
       </Box>
     </div>

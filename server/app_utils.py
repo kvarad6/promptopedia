@@ -1,6 +1,11 @@
 from logger import putlog
 import json
 import os
+from typing import List
+
+from fastapi import APIRouter, Body, Request, Response, HTTPException, status
+from fastapi.encoders import jsonable_encoder
+
 
 log = putlog(__file__)
 
@@ -23,7 +28,7 @@ def readJson(filename):
     try:
         content = json.loads(readFile(filename))
     except Exception as Err:
-        log.error("{}".format(Err),exc_info=True)
+        log.error("{}".format(Err), exc_info=True)
 
     return content
 
@@ -52,4 +57,3 @@ def writeJson(filename, content):
         status = "Failed"
 
     return status
-

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Grid, Avatar, IconButton, Typography } from '@mui/material'
 import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
 import { auth } from "../firebase"
@@ -8,6 +8,10 @@ import signinwithgoogle from "../static/images/avatars/signinwithgoogle.png"
 
 
 const Signin = () => {
+
+    const [profilePicUrl, setProfilePicUrl] = useState(null);
+    const [userName, setUserName] = useState(null);
+    const [userEmail, setUserEmail] = useState(null);
 
     const navigate = useNavigate();
     const provider = new GoogleAuthProvider();
@@ -21,10 +25,21 @@ const Signin = () => {
                 // const token = credential.accessToken;
                 // The signed-in user info.
                 const user = result.user;
-                console.log("user", user);
-                const profilePicUrl = user.photoURL;
+                console.log("user:", user);
+                if (user) {
+                    setProfilePicUrl(user.photoURL);
+                    setUserEmail(user.email);
+                    setUserName(user.displayName);
+                }
+                console.log("userEmail:", user.email);
+                // Navigate to Posts component, passing user data in props
+                // navigate('/create-post', {
+                //     profilePicUrl: user.photoURL,
+                //     userEmail: user.email,
+                //     userName: user.displayName,
+                // });
                 // console.log('Profile picture URL:', profilePicUrl);
-                navigate("/", { someProp: "value" });
+                // navigate("/", { someProp: "value" });
                 navigate("/");
 
                 // ...
