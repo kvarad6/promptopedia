@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Grid, Avatar, IconButton, Typography } from '@mui/material'
 import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
 import { auth } from "../firebase"
 import { useNavigate } from "react-router-dom";
 import signinwithgoogle from "../static/images/avatars/signinwithgoogle.png"
+import CreatePost from './CreatePost';
 // import { NavigationContainer } from '@react-navigation/native'; // For React Navigation
 
 
@@ -32,6 +33,7 @@ const Signin = () => {
                     setUserName(user.displayName);
                 }
                 console.log("userEmail:", user.email);
+
                 // Navigate to Posts component, passing user data in props
                 // navigate('/create-post', {
                 //     profilePicUrl: user.photoURL,
@@ -39,8 +41,9 @@ const Signin = () => {
                 //     userName: user.displayName,
                 // });
                 // console.log('Profile picture URL:', profilePicUrl);
-                // navigate("/", { someProp: "value" });
-                navigate("/");
+                navigate("/", { state : {userEmail: user.email, userName: user.displayName, photoURL: user.photoURL} });
+                // navigate("/");
+                // navigate("/create-post");
 
                 // ...
             }).catch((error) => {

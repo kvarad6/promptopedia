@@ -4,9 +4,8 @@ import { useState, useEffect } from 'react'
 import axios from 'axios';
 
 
-const Posts = (props) => {
+const Posts = () => {
     //destructuring prop
-    const { profilePicUrl, userEmail, userName } = props;
 
     const [posts, setPosts] = useState([]);
 
@@ -32,11 +31,18 @@ const Posts = (props) => {
             <Grid sx={{ display: 'flex', flexDirection: 'row', alignItems: 'space-evenly', flexWrap: 'wrap', mt: 5, gap: 10, ml: 25 }}>
                 {posts.map((post) => (
                     <Card key={post.id} sx={{ width: '300px' }}>
-                        {/* <CardHeader title={post.prompt}> */}
-                            {/* {profilePicUrl && <Avatar src={profilePicUrl} />} */}
-                            {/* <Typography variant="body1">{userName}</Typography>
-                            <Typography variant="body2">{userEmail}</Typography> */}
-                        {/* </CardHeader> */}
+                        <CardHeader 
+
+                            avatar={
+                                <Avatar src = {post.photo} sx={{ bgcolor: "black" }} aria-label="recipe">
+                                    
+                                </Avatar>
+                            }
+                            title={post.name}
+                            subheader={post.email}
+                        
+                        />
+                
                         {/* Add CardMedia if you have image URLs in your data */}
                         {/* <CardMedia image={post.imageUrl} title={post.prompt} /> */}
                         <CardContent>

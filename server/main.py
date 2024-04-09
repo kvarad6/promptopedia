@@ -54,10 +54,13 @@ async def get_items():
 
 
 @app.post("/items")
-async def create_item(prompt: str = Form(...), tags: str = Form(...)):
+async def create_item(prompt: str = Form(...), tags: str = Form(...), name: str = Form(...), email: str = Form(...), photo: str = Form(...)):
     doc_ref = firestore_db.collection(collection_name).document()
     item = {
         "id": doc_ref.id,
+        "name": name,
+        "email": email,
+        "photo": photo,
         "prompt": prompt,
         "tags": tags.split(','),  # Split comma-separated tags
     }

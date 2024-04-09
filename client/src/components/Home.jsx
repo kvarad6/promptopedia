@@ -5,9 +5,17 @@ import { Typography, Grid, Button, Avatar } from '@mui/material'
 // import CreatePost from './CreatePost'
 // import UserProfile from './UserProfile'
 import Posts from './Posts'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 const Home = () => {
+    const location = useLocation();
+    console.log(location.state)
+
+    const navigate = useNavigate()
+
+    function gotoCreatePost(){
+        navigate("/create-post", {state: {userEmail: location.state.userEmail, userName: location.state.userName, photoURL: location.state.photoURL}})
+    }
     return (
         <div>
             <Grid sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', ml: 20, mr: 15, mt: 5 }}>
@@ -18,9 +26,9 @@ const Home = () => {
                     <Grid item xs={4}>
                         {/* <CreatePost /> */}
                         {/* need to be handled */}
-                        <Link to="/create-post">
-                            <Button variant="contained" sx={{ borderRadius: 10 }}>Create Post</Button>
-                        </Link>
+                        {/* <Link to="/create-post"> */}
+                        <Button onClick={gotoCreatePost} variant="contained" sx={{ borderRadius: 10 }}>Create Post</Button>
+                        {/* </Link> */}
 
                     </Grid>
                     <Grid item xs={4}>
@@ -29,7 +37,7 @@ const Home = () => {
                     <Grid item xs={4}>
                         <Link to="/user-profile">
                             <Button>
-                                <Avatar>V</Avatar>
+                                <Avatar src={location.state.photoURL}></Avatar>
                             </Button>
                         </Link>
                     </Grid>

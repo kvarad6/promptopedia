@@ -1,13 +1,11 @@
 import { Button, Typography, Grid, TextField, FormControl, FormLabel, Alert, Avatar } from '@mui/material'
 import React, { useState, useEffect } from 'react'
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 import axios from 'axios';
 import Signout from './Signout';
 
 
-
-const CreatePost = (props) => {
-    // const { profilePicUrl, userEmail, userName } = props;
+const CreatePost = () => {
     const [formData, setFormData] = useState({
         prompt: '',
         tags: ''
@@ -15,28 +13,12 @@ const CreatePost = (props) => {
 
     const [showAlert, setShowAlert] = useState(false);
 
-    // const [prompt, setPrompt] = useState('');
-    // const [tags, setTags] = useState('');
+    const location = useLocation();
+    console.log(location.state)
+    const email = location.state.userEmail;
+    const name = location.state.userName;
+    const photo = location.state.photoURL;
 
-    // const handleSubmit = async (event) => {
-    //     event.preventDefault();
-    //     console.log(formData.prompt)
-    //     console.log(formData.tags)
-    //     const response = await fetch('/api/submit-data', {
-    //         method: 'POST',
-    //         headers: { 'Content-Type': 'application/json' },
-    //         body: JSON.stringify(formData),
-    //     });
-
-    //     if (!response.ok) {
-    //         console.error('Error submitting form:', response.statusText);
-    //         // Handle errors appropriately (e.g., display error message to user)
-    //     } else {
-    //         console.log('Form data submitted successfully!');
-    //         // Clear form data or perform other actions after successful submission
-    //         setFormData({ prompt: '', tags: '' });
-    //     }
-    // };
     const handleSubmit = async (event) => {
         event.preventDefault();
         setShowAlert(false); // Reset alert visibility before submission
@@ -46,19 +28,19 @@ const CreatePost = (props) => {
         console.log('formData:', formData);
 
         try {
-            const response = await axios.post('http://0.0.0.0:8000/items', formData, {
+            // const response = await axios.post('http://0.0.0.0:8000/items', formData, {
+            //     headers: { 'Content-Type': 'multipart/form-data' },
+            // });
+            const data = {
+                ...formData,
+                email,
+                name,
+                photo,
+            };
+            console.log("data:", data)
+            const response = await axios.post('http://0.0.0.0:8000/items', data, {
                 headers: { 'Content-Type': 'multipart/form-data' },
             });
-            // const data = {
-            //     ...formData,
-            //     profilePicUrl,
-            //     userEmail,
-            //     userName,
-            // };
-            // console.log("data:", data)
-            // const response = await axios.post('http://0.0.0.0:8000/items', data, {
-            //     headers: { 'Content-Type': 'application/json' },
-            // });
 
             if (response.status === 200) { // Check for successful response
                 console.log('Form data submitted successfully!');
