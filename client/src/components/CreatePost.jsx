@@ -1,13 +1,13 @@
-import { Button, Typography, Grid, TextField, Box, FormControl, InputLabel, FormLabel, Alert } from '@mui/material'
+import { Button, Typography, Grid, TextField, FormControl, FormLabel, Alert, Avatar } from '@mui/material'
 import React, { useState, useEffect } from 'react'
 import { Link } from "react-router-dom"
-import { createContext } from 'react';
 import axios from 'axios';
+import Signout from './Signout';
 
 
 
 const CreatePost = (props) => {
-    const { profilePicUrl, userEmail, userName } = props;
+    // const { profilePicUrl, userEmail, userName } = props;
     const [formData, setFormData] = useState({
         prompt: '',
         tags: ''
@@ -98,6 +98,25 @@ const CreatePost = (props) => {
 
     return (
         <div>
+            <Grid sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', ml: 20, mr: 15, mt: 5 }}>
+                <Grid item xs={6}>
+                    <Typography sx={{ fontSize: 25, color: 'white' }}>Promptopedia</Typography>
+                </Grid>
+                <Grid item xs={6} sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', gap: 5 }}>
+                    <Grid item xs={6}>
+                        <Link to="/user-profile">
+                            <Button>
+                                <Avatar>V</Avatar>
+                            </Button>
+                        </Link>
+                    </Grid>
+
+                    <Grid item xs={6}>
+                        <Signout />
+                    </Grid>
+                </Grid>
+            </Grid>
+
             <Grid sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', mt: 20, ml: 5, gap: 5 }}>
                 <Grid item>
                     <Typography variant='h2' sx={{ color: 'white' }}>Create Post</Typography>
@@ -108,8 +127,8 @@ const CreatePost = (props) => {
             </Grid>
 
             <form onSubmit={handleSubmit}>
-                <FormControl sx={{ display: 'flex', flexDirection: 'column', mb: 2, ml: 10, mr: 10, mt: 5, width: 400, gap:3 }}>
-                    <FormLabel sx={{ color: 'white', fontSize:25 }}>
+                <FormControl sx={{ display: 'flex', flexDirection: 'column', mb: 2, ml: 10, mr: 10, mt: 5, width: 400, gap: 3 }}>
+                    <FormLabel sx={{ color: 'white', fontSize: 25 }}>
                         Prompt
                     </FormLabel>
                     <TextField

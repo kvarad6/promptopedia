@@ -1,9 +1,9 @@
 import React from 'react'
 import Signout from './Signout'
-import { Typography, Grid, Button } from '@mui/material'
-import SearchBar from './SearchBar'
-import CreatePost from './CreatePost'
-import UserProfile from './UserProfile'
+import { Typography, Grid, Button, Avatar } from '@mui/material'
+// import SearchBar from './SearchBar'
+// import CreatePost from './CreatePost'
+// import UserProfile from './UserProfile'
 import Posts from './Posts'
 import { Link } from 'react-router-dom';
 
@@ -27,7 +27,11 @@ const Home = () => {
                         <Signout />
                     </Grid>
                     <Grid item xs={4}>
-                        <UserProfile />
+                        <Link to="/user-profile">
+                            <Button>
+                                <Avatar>V</Avatar>
+                            </Button>
+                        </Link>
                     </Grid>
                 </Grid>
             </Grid>
