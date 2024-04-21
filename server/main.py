@@ -69,14 +69,14 @@ async def create_item(prompt: str = Form(...), tags: str = Form(...), name: str 
     return item
 
 
-# @app.get("/items/{item_id}")
-# async def get_item(item_id: str):
-#     doc_ref = firestore_db.collection(collection_name).document(item_id)
-#     doc = await doc_ref.get()
-#     if doc.exists:
-#         return doc.to_dict()
-#     else:
-#         return {"error": "Item not found"}
+@app.get("/items/{item_id}")
+async def get_item(item_id: str):
+    doc_ref = firestore_db.collection(collection_name).document(item_id)
+    doc = doc_ref.get()
+    if doc.exists:
+        return doc.to_dict()
+    else:
+        return {"error": "Item not found"}
 
 
 # @app.put("/items/{item_id}")
