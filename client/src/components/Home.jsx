@@ -1,25 +1,31 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Signout from './Signout'
 import { Typography, Grid, Button, Avatar } from '@mui/material'
-// import SearchBar from './SearchBar'
-// import CreatePost from './CreatePost'
-// import UserProfile from './UserProfile'
 import Posts from './Posts'
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import ContentCopyRoundedIcon from '@mui/icons-material/ContentCopyRounded';
 
 const Home = () => {
+
+    const [copiedText, setCopiedText] = useState();
+
     const location = useLocation();
     console.log(location.state)
 
     const navigate = useNavigate()
 
-    function gotoCreatePost(){
-        navigate("/create-post", {state: {userEmail: location.state.userEmail, userName: location.state.userName, photoURL: location.state.photoURL}})
+    function gotoCreatePost() {
+        navigate("/create-post", { state: { userEmail: location.state.userEmail, userName: location.state.userName, photoURL: location.state.photoURL } })
     }
 
-    function gotoUserProfile(){
-        navigate("/user-profile", {state: {userEmail: location.state.userEmail}})
+    function gotoUserProfile() {
+        navigate("/user-profile", { state: { userEmail: location.state.userEmail, userName: location.state.userName, photoURL: location.state.photoURL } })
     }
+
+    const handleCopy = (copiedText) => {
+        setCopiedText(copiedText)
+    }
+
     return (
         <div>
             <Grid sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', ml: 20, mr: 15, mt: 5 }}>
@@ -28,22 +34,12 @@ const Home = () => {
                 </Grid>
                 <Grid item xs={6} sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', gap: 5 }}>
                     <Grid item xs={4}>
-                        {/* <CreatePost /> */}
-                        {/* need to be handled */}
-                        {/* <Link to="/create-post"> */}
                         <Button onClick={gotoCreatePost} variant="contained" sx={{ borderRadius: 10 }}>Create Post</Button>
-                        {/* </Link> */}
-
                     </Grid>
                     <Grid item xs={4}>
                         <Signout />
                     </Grid>
                     <Grid item xs={4}>
-                        {/* <Link to="/user-profile">
-                            <Button>
-                                <Avatar src={location.state.photoURL}></Avatar>
-                            </Button>
-                        </Link> */}
                         <Button onClick={gotoUserProfile}><Avatar src={location.state.photoURL}></Avatar></Button>
                     </Grid>
                 </Grid>
@@ -56,7 +52,7 @@ const Home = () => {
                     <Typography variant='h6' sx={{ color: 'white' }}>Promptopia is an open-source AI prompting tool for modern world to discover, create and share creative prompts</Typography>
                 </Grid>
                 <Grid item xs={4}>
-                    <Posts />
+                    <Posts onPostCopy={handleCopy} />
                 </Grid>
             </Grid>
             {/* <SearchBar /> */}

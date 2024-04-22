@@ -25,8 +25,6 @@ const CreatePost = () => {
         event.preventDefault();
         setShowAlert(false); // Reset alert visibility before submission
 
-        // console.log('Prompt:', formData.prompt);
-        // console.log('Tags:', formData.tags);
         console.log('formData:', formData);
 
         try {
@@ -80,7 +78,7 @@ const CreatePost = () => {
     }, [showAlert]); // Dependency array: only re-run when showAlert changes
 
     function gotoUserProfile() {
-        navigate("/user-profile", { state: { userEmail: location.state.userEmail } })
+        navigate("/user-profile", { state: { userEmail: location.state.userEmail, userName: location.state.userName, photoURL: location.state.photoURL } })
     }
 
     function gotoHomePage() {
