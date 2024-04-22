@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Button, Grid, Typography, Card, CardHeader, Avatar, CardContent } from '@mui/material'
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useNavigate, useLocation,  } from 'react-router-dom';
 import Signout from './Signout'
 import axios from 'axios';
 
@@ -11,6 +11,8 @@ const UserProfile = () => {
 
   const location = useLocation();
   const email = location.state.userEmail;
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,9 +37,13 @@ const UserProfile = () => {
     fetchData();
   }, []);
 
-  // function gotoCreatePost() {
-  //   navigate("/create-post", { state: { userEmail: location.state.userEmail, userName: location.state.userName, photoURL: location.state.photoURL } })
-  // }
+  function gotoCreatePost() {
+    navigate("/create-post", { state: { userEmail: location.state.userEmail, userName: location.state.userName, photoURL: location.state.photoURL } })
+  }
+
+  function gotoHomePage(){
+    navigate("/", { state: { userEmail: location.state.userEmail, userName: location.state.userName, photoURL: location.state.photoURL } })
+  }
 
   return (
     <>
@@ -46,14 +52,15 @@ const UserProfile = () => {
           <Typography sx={{ fontSize: 25, color: 'white' }}>Promptopedia</Typography>
         </Grid>
         <Grid item xs={6} sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', gap: 5 }}>
-          <Grid item xs={6}>
+          <Grid item xs={4}>
+            <Button onClick={gotoHomePage} variant="contained" sx={{ borderRadius: 10 }}>Home</Button>
+          </Grid>
+          <Grid item xs={4}>
             {/* <CreatePost /> */}
             {/* need to be handled */}
-            <Link to="/create-post">
-              <Button variant="contained" sx={{ borderRadius: 10 }}>Create Post</Button>
-            </Link>
+            <Button onClick={gotoCreatePost} variant="contained" sx={{ borderRadius: 10 }}>Create Post</Button>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={4}>
             <Signout />
           </Grid>
         </Grid>
