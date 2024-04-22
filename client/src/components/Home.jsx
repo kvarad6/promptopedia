@@ -16,6 +16,10 @@ const Home = () => {
     function gotoCreatePost(){
         navigate("/create-post", {state: {userEmail: location.state.userEmail, userName: location.state.userName, photoURL: location.state.photoURL}})
     }
+
+    function gotoUserProfile(){
+        navigate("/user-profile", {state: {userEmail: location.state.userEmail}})
+    }
     return (
         <div>
             <Grid sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', ml: 20, mr: 15, mt: 5 }}>
@@ -35,11 +39,12 @@ const Home = () => {
                         <Signout />
                     </Grid>
                     <Grid item xs={4}>
-                        <Link to="/user-profile">
+                        {/* <Link to="/user-profile">
                             <Button>
                                 <Avatar src={location.state.photoURL}></Avatar>
                             </Button>
-                        </Link>
+                        </Link> */}
+                        <Button onClick={gotoUserProfile}><Avatar src={location.state.photoURL}></Avatar></Button>
                     </Grid>
                 </Grid>
             </Grid>
