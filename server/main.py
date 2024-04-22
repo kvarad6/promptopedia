@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Body, Form
+from fastapi import FastAPI, Body, Form, Query
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
 from pydantic import BaseModel, Field
@@ -46,6 +46,7 @@ class Item(BaseModel):
 
 @app.get("/items")
 async def get_items():
+    print("inside get_items")
     items = []
     docs = firestore_db.collection(collection_name).stream()
     for doc in docs:
@@ -56,6 +57,7 @@ async def get_items():
 @app.post("/items")
 async def create_item(prompt: str = Form(...), tags: str = Form(...), name: str = Form(...), email: str = Form(...), photo: str = Form(...)):
     doc_ref = firestore_db.collection(collection_name).document()
+    print("inside create_item")
     item = {
         "id": doc_ref.id,
         "name": name,
@@ -69,12 +71,18 @@ async def create_item(prompt: str = Form(...), tags: str = Form(...), name: str 
     return item
 
 
-@app.get("/items/{item_id}")
-async def get_item(item_id: str):
-    doc_ref = firestore_db.collection(collection_name).document(item_id)
-    doc = doc_ref.get()
-    if doc.exists:
-        return doc.to_dict()
+@app.get("/get_items_by_email/")
+async def get_items_by_email(email: str = Query(..., description="Email address to filter posts")):
+
+    print("email:", email)
+    print("inside get_items_by_email")
+    doc_ref = firestore_db.collection(collection_name).where(
+        "email", "==", email)  # Using query operator
+    docs = doc_ref.get()  # Fetch multiple documents
+
+    if docs:
+        posts = [doc.to_dict() for doc in docs]
+        return posts
     else:
         return {"error": "Item not found"}
 
