@@ -9,14 +9,24 @@ const UserProfile = () => {
 
   const [posts, setPosts] = useState([]);
 
-  // const navigate = useNavigate();
-  // const location = useLocation()
+  const location = useLocation();
+  const email = location.state.userEmail;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://0.0.0.0:8000/items/');
-        setPosts(response.data);
+        //to pass email instead of id and filter it out...
+        // const baseUrl = await axios.get("http://0.0.0.0:8000/items/");
+        const baseUrl = 'http://0.0.0.0:8000/get_items_by_email';
+        const url = `${baseUrl}?email=${email}`; // Use template literals for string concatenation
+        console.log("url:", url)
+        const response = await axios.get(url);
+        console.log("response.data:", response.data)
+        if (response.data.error) { // Check for specific error property
+          setPosts({ error: response.data.error }); // Set posts to an object with the error message
+        } else {
+          setPosts(response.data);
+        }
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -61,7 +71,14 @@ const UserProfile = () => {
       <Typography variant="h4" align='center' sx={{ color: "white" }}>
         Posts
       </Typography>
+      {posts.error && (
+        <Typography variant="h6" align='center' sx={{ color: "white" }}>
+          No posts found for your email.
+        </Typography>
+      )}
+      {posts.length > 0 && (
       <Grid sx={{ display: 'flex', flexDirection: 'row', alignItems: 'space-evenly', flexWrap: 'wrap', mt: 5, gap: 10, ml: 25 }}>
+        
         {posts.map((post) => (
           <Card key={post.id} sx={{ width: '300px' }}>
             <CardHeader
@@ -85,6 +102,7 @@ const UserProfile = () => {
           </Card>
         ))}
       </Grid>
+      )}
     </>
   )
 }
