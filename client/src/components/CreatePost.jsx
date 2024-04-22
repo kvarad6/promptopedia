@@ -1,6 +1,6 @@
 import { Button, Typography, Grid, TextField, FormControl, FormLabel, Alert, Avatar } from '@mui/material'
 import React, { useState, useEffect } from 'react'
-import { Link, useLocation } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import axios from 'axios';
 import Signout from './Signout';
 
@@ -18,6 +18,8 @@ const CreatePost = () => {
     const email = location.state.userEmail;
     const name = location.state.userName;
     const photo = location.state.photoURL;
+
+    const navigate = useNavigate()
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -77,6 +79,13 @@ const CreatePost = () => {
         }
     }, [showAlert]); // Dependency array: only re-run when showAlert changes
 
+    function gotoUserProfile() {
+        navigate("/user-profile", { state: { userEmail: location.state.userEmail } })
+    }
+
+    function gotoHomePage() {
+        navigate("/", { state: { userEmail: location.state.userEmail, userName: location.state.userName, photoURL: location.state.photoURL } })
+    }
 
     return (
         <div>
@@ -85,15 +94,14 @@ const CreatePost = () => {
                     <Typography sx={{ fontSize: 25, color: 'white' }}>Promptopedia</Typography>
                 </Grid>
                 <Grid item xs={6} sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', gap: 5 }}>
-                    <Grid item xs={6}>
-                        <Link to="/user-profile">
-                            <Button>
-                                <Avatar>V</Avatar>
-                            </Button>
-                        </Link>
+                    <Grid item xs={4}>
+                        <Button onClick={gotoHomePage} variant="contained" sx={{ borderRadius: 10 }}>Home</Button>
+                    </Grid>
+                    <Grid item xs={4}>
+                        <Button onClick={gotoUserProfile}><Avatar src={location.state.photoURL}></Avatar></Button>
                     </Grid>
 
-                    <Grid item xs={6}>
+                    <Grid item xs={4}>
                         <Signout />
                     </Grid>
                 </Grid>
