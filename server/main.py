@@ -94,11 +94,11 @@ async def get_items_by_email(email: str = Query(..., description="Email address 
 #     return {"message": "Item updated successfully"}
 
 
-# @app.delete("/items/{item_id}")
-# async def delete_item(item_id: str):
-#     doc_ref = firestore_db.collection(collection_name).document(item_id)
-#     await doc_ref.delete()
-#     return {"message": "Item deleted successfully"}
+@app.delete("/delete_post/")
+async def delete_item(postId: str = Query(..., description="Delete post by id")):
+    doc_ref = firestore_db.collection(collection_name).document(postId)
+    doc_ref.delete()
+    return {"message": "Post deleted successfully"}
 
 if __name__ == "__main__":
     uvicorn.run(
