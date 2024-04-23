@@ -3,7 +3,7 @@ import Signout from './Signout'
 import { Typography, Grid, Button, Avatar } from '@mui/material'
 import Posts from './Posts'
 import { useNavigate, useLocation } from 'react-router-dom';
-import ContentCopyRoundedIcon from '@mui/icons-material/ContentCopyRounded';
+// import SearchBar from './SearchBar';
 
 const Home = () => {
 
@@ -30,10 +30,10 @@ const Home = () => {
         <div>
             <Grid sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', ml: 20, mr: 15, mt: 5 }}>
                 <Grid item xs={6}>
-                    <Typography sx={{ fontSize: 25, color: 'white' }}>Promptopedia</Typography>
+                    <Typography sx={{ fontSize: 25, color: 'white', mt:1 }}>Promptopedia</Typography>
                 </Grid>
                 <Grid item xs={6} sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', gap: 5 }}>
-                    <Grid item xs={4}>
+                    <Grid item xs={4} sx={{mt:1}}>
                         <Button onClick={gotoCreatePost} variant="contained" sx={{ borderRadius: 10 }}>Create Post</Button>
                     </Grid>
                     <Grid item xs={4}>
@@ -55,7 +55,6 @@ const Home = () => {
                     <Posts onPostCopy={handleCopy} />
                 </Grid>
             </Grid>
-            {/* <SearchBar /> */}
         </div>
     )
 }

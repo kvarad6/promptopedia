@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import axios from 'axios';
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import ContentCopyRoundedIcon from '@mui/icons-material/ContentCopyRounded';
-
+import SearchBar from './SearchBar';
 
 
 const Posts = ({ onPostCopy }) => {
@@ -29,6 +29,7 @@ const Posts = ({ onPostCopy }) => {
             <Typography variant="h4" align='center' sx={{ color: "white" }}>
                 Posts
             </Typography>
+            {/* <SearchBar /> */}
             <Grid sx={{ display: 'flex', flexDirection: 'row', alignItems: 'space-evenly', flexWrap: 'wrap', mt: 5, gap: 10, ml: 25 }}>
                 {posts.map((post) => (
                     <Card key={post.id} sx={{ width: '300px' }}>
@@ -39,24 +40,24 @@ const Posts = ({ onPostCopy }) => {
                             }
                             title={post.name}
                             subheader={post.email}
+                            action={
+                                <CopyToClipboard text={post.prompt} onCopy={() => onPostCopy(post.prompt)}>
+                                    {/* <Button variant="contained" size="small" sx={{ mt: 3, borderRadius: 20 }}>
+                                            Copy
+                                        </Button> */}
+                                    <IconButton>
+                                        <ContentCopyRoundedIcon />
+                                    </IconButton>
+                                </CopyToClipboard>
+                            }
                         />
                         <CardContent>
                             <Grid sx={{ display: 'flex', flexDirection: 'column', alignItems: 'space-between', gap: 2 }}>
-                                <Grid item xs={4}>
+                                <Grid item xs={6}>
                                     <Typography variant="body1">{post.prompt}</Typography>
                                 </Grid>
-                                <Grid item xs={4}>
+                                <Grid item xs={6}>
                                     <Typography variant="body2">Tags: {post.tags.join(', ')}</Typography>
-                                </Grid>
-                                <Grid item xs={4}>
-                                    <CopyToClipboard text={post.prompt} onCopy={() => onPostCopy(post.prompt)}>
-                                        {/* <Button variant="contained" size="small" sx={{ mt: 3, borderRadius: 20 }}>
-                                            Copy
-                                        </Button> */}
-                                        <IconButton>
-                                            <ContentCopyRoundedIcon />
-                                        </IconButton>
-                                    </CopyToClipboard>
                                 </Grid>
                             </Grid>
                         </CardContent>

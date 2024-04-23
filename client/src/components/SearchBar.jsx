@@ -8,6 +8,7 @@ const SearchBar = ({ onSearch }) => {
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
+    console.log(event.target.value)
     if (onSearch) { // Call onSearch prop function if provided
       onSearch(event.target.value);
     }

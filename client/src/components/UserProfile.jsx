@@ -69,30 +69,6 @@ const UserProfile = () => {
   const handleCopy = (copiedText) => {
     setCopiedText(copiedText)
   }
-
-  // const HandleDelete = (postId) => {
-  //   navigate("/delete-post", {state: {postId: postId}})
-
-  //   useEffect(() => {
-  //     const deleteData = async () => {
-  //       try {
-  //         const baseUrl = 'http://0.0.0.0:8000/delete_post';
-  //         const url = `${baseUrl}?postId=${postId}`;
-  //         console.log("url:", url);
-  //         const response = await axios.delete(url);
-  //         console.log("response:", response);
-  //       } catch (error) {
-  //         console.error('Error in deleting the data:', error);
-  //       }
-  //     };
-  //     deleteData();
-  //   }, [postId]);
-  //   return(
-  //     <>
-  //     </>
-  //   )
-  // }
-
   return (
     <>
       <Grid sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', ml: 20, mr: 15, mt: 5 }}>
