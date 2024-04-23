@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Button, Grid, Typography, Card, CardHeader, Avatar, CardContent, IconButton } from '@mui/material'
-import { Link, useNavigate, useLocation, } from 'react-router-dom';
+import { useNavigate, useLocation, } from 'react-router-dom';
 import Signout from './Signout'
 import axios from 'axios';
 import { CopyToClipboard } from "react-copy-to-clipboard";
@@ -22,13 +22,12 @@ const UserProfile = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        //to pass email instead of id and filter it out...
-        // const baseUrl = await axios.get("http://0.0.0.0:8000/items/");
         const baseUrl = 'http://0.0.0.0:8000/get_items_by_email';
         const url = `${baseUrl}?email=${email}`; // Use template literals for string concatenation
         console.log("url:", url)
         const response = await axios.get(url);
         console.log("response.data:", response.data)
+        console.log("response.data[0].id:", response.data[0].id)
         if (response.data.error) { // Check for specific error property
           setPosts({ error: response.data.error }); // Set posts to an object with the error message
         } else {
@@ -42,6 +41,23 @@ const UserProfile = () => {
     fetchData();
   }, []);
 
+  const HandleDelete = async (postId) => {
+    try {
+      const baseUrl = 'http://0.0.0.0:8000/delete_post';
+      const url = `${baseUrl}?postId=${postId}`;
+      console.log("url:", url);
+      const response = await axios.delete(url);
+      console.log("response:", response);
+
+      // Optimistic Update (Optional): Remove the post from UI
+      setPosts(prevPosts => prevPosts.filter(post => post.id !== postId));
+
+    } catch (error) {
+      console.error('Error in deleting the data:', error);
+    }
+  };
+
+
   function gotoCreatePost() {
     navigate("/create-post", { state: { userEmail: location.state.userEmail, userName: location.state.userName, photoURL: location.state.photoURL } })
   }
@@ -53,6 +69,29 @@ const UserProfile = () => {
   const handleCopy = (copiedText) => {
     setCopiedText(copiedText)
   }
+
+  // const HandleDelete = (postId) => {
+  //   navigate("/delete-post", {state: {postId: postId}})
+
+  //   useEffect(() => {
+  //     const deleteData = async () => {
+  //       try {
+  //         const baseUrl = 'http://0.0.0.0:8000/delete_post';
+  //         const url = `${baseUrl}?postId=${postId}`;
+  //         console.log("url:", url);
+  //         const response = await axios.delete(url);
+  //         console.log("response:", response);
+  //       } catch (error) {
+  //         console.error('Error in deleting the data:', error);
+  //       }
+  //     };
+  //     deleteData();
+  //   }, [postId]);
+  //   return(
+  //     <>
+  //     </>
+  //   )
+  // }
 
   return (
     <>
@@ -129,7 +168,7 @@ const UserProfile = () => {
                     </Grid>
                     <Grid item xs={4}>
                       <IconButton>
-                        <DeleteIcon />
+                        <DeleteIcon onClick={() => HandleDelete(post.id)} />
                       </IconButton>
                     </Grid>
                   </Grid>
