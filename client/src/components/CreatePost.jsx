@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import axios from 'axios';
 import Signout from './Signout';
+import Header from './Header';
 
 
 const CreatePost = () => {
@@ -87,7 +88,7 @@ const CreatePost = () => {
 
     return (
         <div>
-            <Grid sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', ml: 20, mr: 15, mt: 5 }}>
+            {/* <Grid sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', ml: 20, mr: 15, mt: 5 }}>
                 <Grid item xs={6}>
                     <Typography sx={{ fontSize: 25, color: 'white' }}>Promptopedia</Typography>
                 </Grid>
@@ -103,9 +104,10 @@ const CreatePost = () => {
                         <Signout />
                     </Grid>
                 </Grid>
-            </Grid>
+            </Grid> */}
+            <Header />
 
-            <Grid sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', mt: 20, ml: 5, gap: 5 }}>
+            <Grid sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', mt: 20, ml: 20, gap: 5 }}>
                 <Grid item>
                     <Typography variant='h2' sx={{ color: 'white' }}>Create Post</Typography>
                 </Grid>
@@ -115,7 +117,7 @@ const CreatePost = () => {
             </Grid>
 
             <form onSubmit={handleSubmit}>
-                <FormControl sx={{ display: 'flex', flexDirection: 'column', mb: 2, ml: 10, mr: 10, mt: 5, width: 400, gap: 3 }}>
+                <FormControl sx={{ display: 'flex', flexDirection: 'column', mb: 2, ml: 20, mr: 10, mt: 5, width: 400, gap: 3 }}>
                     <FormLabel sx={{ color: 'white', fontSize: 25 }}>
                         Prompt
                     </FormLabel>
@@ -130,7 +132,8 @@ const CreatePost = () => {
                                 "& fieldset": {
                                     borderColor: "white"
                                 }
-                            }
+                            },
+                            width:600
                         }}
                         inputProps={{ style: { color: "white" } }}
                         value={formData.prompt}
@@ -150,7 +153,8 @@ const CreatePost = () => {
                                 "& fieldset": {
                                     borderColor: "white"
                                 }
-                            }
+                            },
+                            width: 600
                         }}
                         inputProps={{ style: { color: "white" } }}
                         value={formData.tags}

@@ -3,6 +3,7 @@ import Signout from './Signout'
 import { Typography, Grid, Button, Avatar } from '@mui/material'
 import Posts from './Posts'
 import { useNavigate, useLocation } from 'react-router-dom';
+import Header from './Header';
 // import SearchBar from './SearchBar';
 
 const Home = () => {
@@ -28,7 +29,8 @@ const Home = () => {
 
     return (
         <div>
-            <Grid sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', ml: 20, mr: 15, mt: 5 }}>
+            <Header />
+            {/* <Grid sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', ml: 20, mr: 15, mt: 5 }}>
                 <Grid item xs={6}>
                     <Typography sx={{ fontSize: 25, color: 'white', mt:1 }}>Promptopedia</Typography>
                 </Grid>
@@ -43,7 +45,7 @@ const Home = () => {
                         <Button onClick={gotoUserProfile}><Avatar src={location.state.photoURL}></Avatar></Button>
                     </Grid>
                 </Grid>
-            </Grid>
+            </Grid> */}
             <Grid sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, mt: 20 }}>
                 <Grid item xs={4}>
                     <Typography variant='h3' sx={{ color: 'white' }}>Discover & Share AI-Powered Prompts</Typography>

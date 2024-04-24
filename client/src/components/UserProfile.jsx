@@ -7,6 +7,7 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ContentCopyRoundedIcon from '@mui/icons-material/ContentCopyRounded';
+import Header from './Header';
 
 
 const UserProfile = () => {
@@ -71,7 +72,7 @@ const UserProfile = () => {
   }
   return (
     <>
-      <Grid sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', ml: 20, mr: 15, mt: 5 }}>
+      {/* <Grid sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', ml: 20, mr: 15, mt: 5 }}>
         <Grid item xs={6}>
           <Typography sx={{ fontSize: 25, color: 'white' }}>Promptopedia</Typography>
         </Grid>
@@ -80,17 +81,17 @@ const UserProfile = () => {
             <Button onClick={gotoHomePage} variant="contained" sx={{ borderRadius: 10 }}>Home</Button>
           </Grid>
           <Grid item xs={4}>
-            {/* <CreatePost /> */}
-            {/* need to be handled */}
             <Button onClick={gotoCreatePost} variant="contained" sx={{ borderRadius: 10 }}>Create Post</Button>
           </Grid>
           <Grid item xs={4}>
             <Signout />
           </Grid>
         </Grid>
-      </Grid>
+      </Grid> */}
 
-      <Grid sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', mt: 5, ml: 10, gap: 5 }}>
+      <Header />
+
+      <Grid sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', mt: 20, ml: 20, gap: 5 }}>
         <Grid item>
           <Typography variant='h2' sx={{ color: 'white' }}>My Profile</Typography>
         </Grid>
@@ -108,7 +109,7 @@ const UserProfile = () => {
         </Typography>
       )}
       {posts.length > 0 && (
-        <Grid sx={{ display: 'flex', flexDirection: 'row', alignItems: 'space-evenly', flexWrap: 'wrap', mt: 5, gap: 10, ml: 25 }}>
+        <Grid sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', flexWrap: 'wrap', gap: 10}}>
           {posts.map((post) => (
             <Card key={post.id} sx={{ width: '300px' }}>
               <CardHeader
