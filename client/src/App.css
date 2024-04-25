@@ -46,11 +46,12 @@ body {
 
 .background-image {
   background-image: url("./static/images/bg/bg1.jpg");
-  background-size: cover;
-  background-position: center;
-  height: 450vh;
-  min-height: 150vh;
-  height: 100%;
-  background-attachment: fixed;
-  overflow: hidden;
+  /* background-image: linear-gradient(to top, #f43b47 0%, #453a94 100%); */
+  /* background-size: contain; */
+  /* background-position: center; */
+  /* height: 450vh;*/
+  /* min-height: 450vh; */
+  /* height: 100%; */
+  /* background-attachment: fixed; */
+  /* overflow: hidden; */
 }

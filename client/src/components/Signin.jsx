@@ -41,7 +41,7 @@ const Signin = () => {
                 //     userName: user.displayName,
                 // });
                 // console.log('Profile picture URL:', profilePicUrl);
-                navigate("/", { state : {userEmail: user.email, userName: user.displayName, photoURL: user.photoURL} });
+                navigate("/", { state: { userEmail: user.email, userName: user.displayName, photoURL: user.photoURL } });
                 // navigate("/");
                 // navigate("/create-post");
 
@@ -56,7 +56,7 @@ const Signin = () => {
     }
 
     return (
-        <div>
+        <div className='background-image'>
             <Grid sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', ml: 30, mr: 30, mt: 25, gap: 5 }}>
                 <Grid item xs={4}>
                     <Typography variant='h1' sx={{ color: 'white' }}>Promptopedia</Typography>

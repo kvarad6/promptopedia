@@ -79,7 +79,7 @@ const CreatePost = () => {
     }, [showAlert]); // Dependency array: only re-run when showAlert changes
 
     return (
-        <div>
+        <div className='background-image'>
             <Header />
 
             <Grid sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', mt: 10, ml: 20, gap: 5 }}>
@@ -106,6 +106,12 @@ const CreatePost = () => {
                                 "& fieldset": {
                                     borderColor: "white"
                                 }
+                            },
+                            '&:hover fieldset': {
+                                borderColor: 'white',
+                            },
+                            '& label.Mui-focused': {
+                                color: 'white',
                             },
                             width: 600
                         }}

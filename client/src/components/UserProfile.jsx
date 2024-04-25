@@ -61,10 +61,10 @@ const UserProfile = () => {
     setCopiedText(copiedText)
   }
   return (
-    <>
+    <div className='background-image'>
       <Header />
 
-      <Grid sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 5, ml: 30 }}>
+      <Grid sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 5, ml: 30, mt: 10 }}>
         <Grid item xs={6}>
           <Typography variant='h2' sx={{ color: 'white' }}>My Profile</Typography>
         </Grid>
@@ -73,7 +73,7 @@ const UserProfile = () => {
         </Grid>
       </Grid>
 
-      <Grid sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 5 }}>
+      <Grid sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 5, mt:5 }}>
         <Grid item>
           <Typography variant="h4" align='center' sx={{ color: "white" }}>
             Posts
@@ -90,7 +90,7 @@ const UserProfile = () => {
               {posts.map((post) => (
                 <Card key={post.id} sx={{
                   width: '300px', minHeight: '100px', mb: "1rem", backgroundImage: "linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%)"
- }}>
+                }}>
                   <CardHeader
                     avatar={
                       <Avatar src={post.photo} sx={{ bgcolor: "black" }} aria-label="recipe"></Avatar>
@@ -112,7 +112,7 @@ const UserProfile = () => {
                           {post.tags.map((tag) => (
                             <span key={tag}>#  {tag} </span>
                           ))}
-                          </Typography>
+                        </Typography>
                       </Grid>
                       <Grid item xs={4} sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
                         <Grid item xs={4}>
@@ -141,7 +141,7 @@ const UserProfile = () => {
           )}
         </Grid>
       </Grid>
-    </>
+    </div>
   )
 }
 
