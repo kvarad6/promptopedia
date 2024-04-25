@@ -1,5 +1,5 @@
 import React from 'react'
-import { Typography, Grid, CardHeader, CardContent, Card, Avatar, Button, IconButton } from '@mui/material'
+import { Typography, Grid, CardHeader, CardContent, Card, Avatar, Button, IconButton, ImageList } from '@mui/material'
 import { useState, useEffect } from 'react'
 import axios from 'axios';
 import { CopyToClipboard } from "react-copy-to-clipboard";
@@ -30,9 +30,9 @@ const Posts = ({ onPostCopy }) => {
                 Posts
             </Typography>
             {/* <SearchBar /> */}
-            <Grid sx={{ display: 'flex', flexDirection: 'row', alignItems: 'space-evenly', flexWrap: 'wrap', mt: 5, gap: 10, ml: 25 }}>
+            <ImageList variant="masonry" cols={3} gap={20} sx={{ rowGap: 10 }}>
                 {posts.map((post) => (
-                    <Card key={post.id} sx={{ width: '300px' }}>
+                    <Card key={post.id} sx={{ width: '300px', minHeight: '100px', mb: "1rem" }}>
                         <CardHeader
                             avatar={
                                 <Avatar src={post.photo} sx={{ bgcolor: "black" }} aria-label="recipe">
@@ -42,9 +42,6 @@ const Posts = ({ onPostCopy }) => {
                             subheader={post.email}
                             action={
                                 <CopyToClipboard text={post.prompt} onCopy={() => onPostCopy(post.prompt)}>
-                                    {/* <Button variant="contained" size="small" sx={{ mt: 3, borderRadius: 20 }}>
-                                            Copy
-                                        </Button> */}
                                     <IconButton>
                                         <ContentCopyRoundedIcon />
                                     </IconButton>
@@ -63,7 +60,7 @@ const Posts = ({ onPostCopy }) => {
                         </CardContent>
                     </Card>
                 ))}
-            </Grid>
+            </ImageList>
         </>
 
     );

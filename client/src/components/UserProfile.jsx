@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Button, Grid, Typography, Card, CardHeader, Avatar, CardContent, IconButton } from '@mui/material'
+import { Grid, Typography, Card, CardHeader, Avatar, CardContent, IconButton, Image, ImageList } from '@mui/material'
 import { useNavigate, useLocation, } from 'react-router-dom';
-import Signout from './Signout'
 import axios from 'axios';
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import EditIcon from '@mui/icons-material/Edit';
@@ -58,103 +57,79 @@ const UserProfile = () => {
     }
   };
 
-
-  function gotoCreatePost() {
-    navigate("/create-post", { state: { userEmail: location.state.userEmail, userName: location.state.userName, photoURL: location.state.photoURL } })
-  }
-
-  function gotoHomePage() {
-    navigate("/", { state: { userEmail: location.state.userEmail, userName: location.state.userName, photoURL: location.state.photoURL } })
-  }
-
   const handleCopy = (copiedText) => {
     setCopiedText(copiedText)
   }
   return (
     <>
-      {/* <Grid sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', ml: 20, mr: 15, mt: 5 }}>
-        <Grid item xs={6}>
-          <Typography sx={{ fontSize: 25, color: 'white' }}>Promptopedia</Typography>
-        </Grid>
-        <Grid item xs={6} sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', gap: 5 }}>
-          <Grid item xs={4}>
-            <Button onClick={gotoHomePage} variant="contained" sx={{ borderRadius: 10 }}>Home</Button>
-          </Grid>
-          <Grid item xs={4}>
-            <Button onClick={gotoCreatePost} variant="contained" sx={{ borderRadius: 10 }}>Create Post</Button>
-          </Grid>
-          <Grid item xs={4}>
-            <Signout />
-          </Grid>
-        </Grid>
-      </Grid> */}
-
       <Header />
 
-      <Grid sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', mt: 20, ml: 20, gap: 5 }}>
+      <Grid sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', ml: 20, gap: 5 }}>
         <Grid item>
           <Typography variant='h2' sx={{ color: 'white' }}>My Profile</Typography>
         </Grid>
         <Grid item>
           <Typography variant='h6' sx={{ color: 'white' }}>Welcome to your personalized profile page!</Typography>
         </Grid>
-      </Grid>
+        <Grid item>
 
-      <Typography variant="h4" align='center' sx={{ color: "white" }}>
-        Posts
-      </Typography>
-      {posts.error && (
-        <Typography variant="h6" align='center' sx={{ color: "white" }}>
-          No posts found for your email.
-        </Typography>
-      )}
-      {posts.length > 0 && (
-        <Grid sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', flexWrap: 'wrap', gap: 10}}>
-          {posts.map((post) => (
-            <Card key={post.id} sx={{ width: '300px' }}>
-              <CardHeader
-                avatar={
-                  <Avatar src={post.photo} sx={{ bgcolor: "black" }} aria-label="recipe"></Avatar>
-                }
-                title={post.name}
-                subheader={post.email}
-              />
+          <Typography variant="h4" align='center' sx={{ color: "white" }}>
+            Posts
+          </Typography>
+          {posts.error && (
+            <Typography variant="h6" align='center' sx={{ color: "white" }}>
+              No posts found for your email.
+            </Typography>
+          )}
+          {posts.length > 0 && (
+            <ImageList variant="masonry" cols={3} gap={20} sx={{ rowGap: 10 }}>
+              {posts.map((post) => (
+                <Card key={post.id} sx={{ width: '300px', minHeight: '100px', mb: "1rem" }}>
+                  <CardHeader
+                    avatar={
+                      <Avatar src={post.photo} sx={{ bgcolor: "black" }} aria-label="recipe"></Avatar>
+                    }
+                    title={post.name}
+                    subheader={post.email}
+                  />
 
-              {/* Add CardMedia if you have image URLs in your data */}
-              {/* <CardMedia image={post.imageUrl} title={post.prompt} /> */}
-              <CardContent>
-                <Grid sx={{ display: 'flex', flexDirection: 'column', alignItems: 'space-between', gap: 2 }}>
-                  <Grid item xs={4}>
-                    <Typography variant="body1">{post.prompt}</Typography>
-                  </Grid>
-                  <Grid item xs={4}>
-                    <Typography variant="body2">Tags: {post.tags.join(', ')}</Typography>
-                  </Grid>
-                  <Grid item xs={4} sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
-                    <Grid item xs={4}>
-                      <CopyToClipboard text={post.prompt} onCopy={() => handleCopy(post.prompt)}>
-                        <IconButton>
-                          <ContentCopyRoundedIcon />
-                        </IconButton>
-                      </CopyToClipboard>
+                  {/* Add CardMedia if you have image URLs in your data */}
+                  {/* <CardMedia image={post.imageUrl} title={post.prompt} /> */}
+                  <CardContent>
+                    <Grid sx={{ display: 'flex', flexDirection: 'column', alignItems: 'space-between', gap: 2 }}>
+                      <Grid item xs={4}>
+                        <Typography variant="body1">{post.prompt}</Typography>
+                      </Grid>
+                      <Grid item xs={4}>
+                        <Typography variant="body2">Tags: {post.tags.join(', ')}</Typography>
+                      </Grid>
+                      <Grid item xs={4} sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
+                        <Grid item xs={4}>
+                          <CopyToClipboard text={post.prompt} onCopy={() => handleCopy(post.prompt)}>
+                            <IconButton>
+                              <ContentCopyRoundedIcon />
+                            </IconButton>
+                          </CopyToClipboard>
+                        </Grid>
+                        <Grid item xs={4}>
+                          <IconButton>
+                            <EditIcon />
+                          </IconButton>
+                        </Grid>
+                        <Grid item xs={4}>
+                          <IconButton>
+                            <DeleteIcon onClick={() => HandleDelete(post.id)} />
+                          </IconButton>
+                        </Grid>
+                      </Grid>
                     </Grid>
-                    <Grid item xs={4}>
-                      <IconButton>
-                        <EditIcon />
-                      </IconButton>
-                    </Grid>
-                    <Grid item xs={4}>
-                      <IconButton>
-                        <DeleteIcon onClick={() => HandleDelete(post.id)} />
-                      </IconButton>
-                    </Grid>
-                  </Grid>
-                </Grid>
-              </CardContent>
-            </Card>
-          ))}
+                  </CardContent>
+                </Card>
+              ))}
+            </ImageList>
+          )}
         </Grid>
-      )}
+      </Grid>
     </>
   )
 }

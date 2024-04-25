@@ -30,23 +30,7 @@ const Home = () => {
     return (
         <div>
             <Header />
-            {/* <Grid sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', ml: 20, mr: 15, mt: 5 }}>
-                <Grid item xs={6}>
-                    <Typography sx={{ fontSize: 25, color: 'white', mt:1 }}>Promptopedia</Typography>
-                </Grid>
-                <Grid item xs={6} sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', gap: 5 }}>
-                    <Grid item xs={4} sx={{mt:1}}>
-                        <Button onClick={gotoCreatePost} variant="contained" sx={{ borderRadius: 10 }}>Create Post</Button>
-                    </Grid>
-                    <Grid item xs={4}>
-                        <Signout />
-                    </Grid>
-                    <Grid item xs={4}>
-                        <Button onClick={gotoUserProfile}><Avatar src={location.state.photoURL}></Avatar></Button>
-                    </Grid>
-                </Grid>
-            </Grid> */}
-            <Grid sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, mt: 20 }}>
+            <Grid sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, mt: 10 }}>
                 <Grid item xs={4}>
                     <Typography variant='h3' sx={{ color: 'white' }}>Discover & Share AI-Powered Prompts</Typography>
                 </Grid>

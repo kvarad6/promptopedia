@@ -47,8 +47,8 @@ body{
   background-image: url("./static/images/bg/bg.jpg");
   background-size: cover;
   background-position: center;
-  /* height: 250vh;*/
-  /* min-height: 150vh; */
+  height: 450vh;
+  min-height: 150vh;
   height: 100%;
   background-attachment: fixed;
   overflow: hidden;

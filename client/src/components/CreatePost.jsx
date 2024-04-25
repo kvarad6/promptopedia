@@ -47,6 +47,7 @@ const CreatePost = () => {
                 console.log('Form data submitted successfully!');
                 setFormData({ prompt: '', tags: '' });
                 setShowAlert(true); // Show success alert on successful submission
+                navigate("/", { state: { userEmail: location.state.userEmail, userName: location.state.userName, photoURL: location.state.photoURL } })
             } else {
                 console.error('Error submitting form:', response.statusText);
                 // Display error message to user (add logic here)
@@ -78,36 +79,11 @@ const CreatePost = () => {
         }
     }, [showAlert]); // Dependency array: only re-run when showAlert changes
 
-    function gotoUserProfile() {
-        navigate("/user-profile", { state: { userEmail: location.state.userEmail, userName: location.state.userName, photoURL: location.state.photoURL } })
-    }
-
-    function gotoHomePage() {
-        navigate("/", { state: { userEmail: location.state.userEmail, userName: location.state.userName, photoURL: location.state.photoURL } })
-    }
-
     return (
         <div>
-            {/* <Grid sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', ml: 20, mr: 15, mt: 5 }}>
-                <Grid item xs={6}>
-                    <Typography sx={{ fontSize: 25, color: 'white' }}>Promptopedia</Typography>
-                </Grid>
-                <Grid item xs={6} sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', gap: 5 }}>
-                    <Grid item xs={4}>
-                        <Button onClick={gotoHomePage} variant="contained" sx={{ borderRadius: 10 }}>Home</Button>
-                    </Grid>
-                    <Grid item xs={4}>
-                        <Button onClick={gotoUserProfile}><Avatar src={location.state.photoURL}></Avatar></Button>
-                    </Grid>
-
-                    <Grid item xs={4}>
-                        <Signout />
-                    </Grid>
-                </Grid>
-            </Grid> */}
             <Header />
 
-            <Grid sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', mt: 20, ml: 20, gap: 5 }}>
+            <Grid sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', mt: 10, ml: 20, gap: 5 }}>
                 <Grid item>
                     <Typography variant='h2' sx={{ color: 'white' }}>Create Post</Typography>
                 </Grid>
@@ -133,16 +109,15 @@ const CreatePost = () => {
                                     borderColor: "white"
                                 }
                             },
-                            width:600
+                            width: 600
                         }}
                         inputProps={{ style: { color: "white" } }}
                         value={formData.prompt}
                         onChange={handleChange}
                         required
-                    // sx={{ input: { color: 'white' } }} 
                     />
                     <FormLabel sx={{ color: 'white', fontSize: 25 }}>
-                        Tags
+                        Tags*
                     </FormLabel>
                     <TextField
                         type="text"
@@ -161,9 +136,16 @@ const CreatePost = () => {
                         onChange={handleChange}
                         required
                     />
-                    <Button type='submit' variant='contained' sx={{ width: 150 }}>
-                        Submit
-                    </Button>
+                    <Grid sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+                        <Grid item xs={6}>
+                            <Button type='submit' variant='contained' sx={{ width: 150, textTransform: 'none' }}>
+                                Create
+                            </Button>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <Typography sx={{ color: 'white', fontSize: 12, mr: 15 }}>*Comma seperated</Typography>
+                        </Grid>
+                    </Grid>
                 </FormControl>
             </form>
             {showAlert && <Alert severity="success" sx={{ width: '400px', margin: '0 auto' }}>Your prompt has been submitted successfully!</Alert>}
