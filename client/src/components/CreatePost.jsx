@@ -1,8 +1,7 @@
-import { Button, Typography, Grid, TextField, FormControl, FormLabel, Alert, Avatar } from '@mui/material'
+import { Button, Typography, Grid, TextField, FormControl, FormLabel, Alert } from '@mui/material'
 import React, { useState, useEffect } from 'react'
-import { Link, useLocation, useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import axios from 'axios';
-import Signout from './Signout';
 import Header from './Header';
 
 
@@ -91,9 +90,8 @@ const CreatePost = () => {
                     <Typography variant='h6' sx={{ color: 'white' }}>Create and share amazing prompts with the world and let your imagination run wild with any AI-powered platform.</Typography>
                 </Grid>
             </Grid>
-
             <form onSubmit={handleSubmit}>
-                <FormControl sx={{ display: 'flex', flexDirection: 'column', mb: 2, ml: 20, mr: 10, mt: 5, width: 400, gap: 3 }}>
+                <FormControl sx={{ display: 'flex', flexDirection: 'column', mb: 2, ml: 20, mr: 10, mt: 5, width: 400, gap: 4 }}>
                     <FormLabel sx={{ color: 'white', fontSize: 25 }}>
                         Prompt
                     </FormLabel>

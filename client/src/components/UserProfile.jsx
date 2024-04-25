@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Grid, Typography, Card, CardHeader, Avatar, CardContent, IconButton, Image, ImageList } from '@mui/material'
+import { Grid, Typography, Card, CardHeader, Avatar, CardContent, IconButton, ImageList } from '@mui/material'
 import { useNavigate, useLocation, } from 'react-router-dom';
 import axios from 'axios';
 import { CopyToClipboard } from "react-copy-to-clipboard";
@@ -64,18 +64,22 @@ const UserProfile = () => {
     <>
       <Header />
 
-      <Grid sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', ml: 20, gap: 5 }}>
-        <Grid item>
+      <Grid sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 5, ml: 30 }}>
+        <Grid item xs={6}>
           <Typography variant='h2' sx={{ color: 'white' }}>My Profile</Typography>
         </Grid>
-        <Grid item>
+        <Grid item xs={6}>
           <Typography variant='h6' sx={{ color: 'white' }}>Welcome to your personalized profile page!</Typography>
         </Grid>
-        <Grid item>
+      </Grid>
 
+      <Grid sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 5 }}>
+        <Grid item>
           <Typography variant="h4" align='center' sx={{ color: "white" }}>
             Posts
           </Typography>
+        </Grid>
+        <Grid item>
           {posts.error && (
             <Typography variant="h6" align='center' sx={{ color: "white" }}>
               No posts found for your email.

@@ -46,7 +46,16 @@ const Header = () => {
                     <Grid sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
                         <Grid item xs={6} sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', ml: 70, gap: 5 }}>
                             <Grid item xs={4} sx={{ mt: 1 }}>
-                                <Button onClick={gotoCreatePost} variant="contained" sx={{ borderRadius: 10, textTransform: 'none' }}>Create Post</Button>
+                                <Button
+                                    onClick={gotoCreatePost}
+                                    variant="contained"
+                                    sx={{
+                                        borderRadius: 10, textTransform: 'none', bgcolor: '#5CD2E6', color: 'black', '&:hover': {
+                                            backgroundColor: '#208be8', boxShadow: 'none' 
+                                        },
+                                    }}>
+                                    Create Post
+                                </Button>
                             </Grid>
                             <Grid item xs={4}>
                                 <Signout />

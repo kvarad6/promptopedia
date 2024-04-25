@@ -2,9 +2,10 @@
   text-align: center;
 }
 
-body{
+body {
   max-width: 100%;
   overflow-x: hidden;
+  background-color: black;
 }
 
 .App-logo {
@@ -44,7 +45,7 @@ body{
 }
 
 .background-image {
-  background-image: url("./static/images/bg/bg.jpg");
+  background-image: url("./static/images/bg/bg1.jpg");
   background-size: cover;
   background-position: center;
   height: 450vh;

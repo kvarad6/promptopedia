@@ -37,7 +37,13 @@ const Signout = () => {
     return (
         <div>
                 {/* {authUser ? <><p>{`Signed in as ${authUser.email}`}</p><Button variant="contained" onClick={userSignout}>Sign Out</Button></> : <p></p>} */}
-            <Button variant="outlined" sx={{ borderRadius: 10, mt:1, textTransform: 'none' }} onClick={userSignout}>Sign Out</Button>
+            <Button 
+            variant="outlined" 
+                sx={{
+                    borderRadius: 10, mt: 1, textTransform: 'none', color: 'white', borderColor:'#5CD2E6', '&:hover': {
+                        backgroundColor: '#208be8', boxShadow: 'none'
+                    } }} 
+            onClick={userSignout}>Sign Out</Button>
         </div>
     )
 }
