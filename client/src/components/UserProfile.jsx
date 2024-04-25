@@ -88,7 +88,9 @@ const UserProfile = () => {
           {posts.length > 0 && (
             <ImageList variant="masonry" cols={3} gap={20} sx={{ rowGap: 10 }}>
               {posts.map((post) => (
-                <Card key={post.id} sx={{ width: '300px', minHeight: '100px', mb: "1rem" }}>
+                <Card key={post.id} sx={{
+                  width: '300px', minHeight: '100px', mb: "1rem", backgroundImage: "linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%)"
+ }}>
                   <CardHeader
                     avatar={
                       <Avatar src={post.photo} sx={{ bgcolor: "black" }} aria-label="recipe"></Avatar>
@@ -105,7 +107,12 @@ const UserProfile = () => {
                         <Typography variant="body1">{post.prompt}</Typography>
                       </Grid>
                       <Grid item xs={4}>
-                        <Typography variant="body2">Tags: {post.tags.join(', ')}</Typography>
+                        <Typography variant="body2">
+                          {/* Tags: {post.tags.join(', ')} */}
+                          {post.tags.map((tag) => (
+                            <span key={tag}>#  {tag} </span>
+                          ))}
+                          </Typography>
                       </Grid>
                       <Grid item xs={4} sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
                         <Grid item xs={4}>

@@ -36,7 +36,7 @@ const Posts = ({ onPostCopy, copiedText }) => {
                 <Grid item>
                     <ImageList variant="masonry" cols={3} gap={20} sx={{ rowGap: 10 }}>
                         {posts.map((post) => (
-                            <Card key={post.id} sx={{ width: '300px', minHeight: '100px', mb: "1rem" }}>
+                            <Card key={post.id} sx={{ width: '300px', minHeight: '100px', mb: "1rem", backgroundImage: "linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%)" }}>
                                 <CardHeader
                                     avatar={
                                         <Avatar src={post.photo} sx={{ bgcolor: "black" }} aria-label="recipe">
@@ -58,7 +58,13 @@ const Posts = ({ onPostCopy, copiedText }) => {
                                             <Typography variant="body1">{post.prompt}</Typography>
                                         </Grid>
                                         <Grid item xs={6}>
-                                            <Typography variant="body2">Tags: {post.tags.join(', ')}</Typography>
+                                            <Typography variant="body2">
+                                                {/* {post.tags.join(', ')} */}
+                                                {post.tags.map((tag) => (
+                                                    <span key={tag}>#  {tag} </span>
+                                                ))}
+                                            </Typography>
+
                                         </Grid>
                                     </Grid>
                                 </CardContent>
