@@ -9,11 +9,18 @@ const Signout = () => {
     const [authUser, setAuthUser] = useState(null);
 
     useEffect(() => {
+        // const storedUser = localStorage.getItem('user'); // Check for stored user data in local storage
+        // console.log("stored user:", storedUser)
+        // if (storedUser) {
+        //     setAuthUser(JSON.parse(storedUser)); // Parse and set the user object
+        // }
         const listen = onAuthStateChanged(auth, (user) => {
             if (user) {
                 // User is signed in
                 const uid = user.uid;
                 console.log(uid)
+                console.log("user in signout page:", user)
+                // localStorage.setItem('user', JSON.stringify(user)); // Store user data in local storage
                 setAuthUser(user)
             } else {
                 // User is signed out
@@ -30,6 +37,7 @@ const Signout = () => {
         signOut(auth).then(() => {
             console.log("sign out successfully")
         }).catch(error => console.log(error));
+        // localStorage.removeItem('user'); // Clear user data on signout
         navigate("/signin");
     }
 

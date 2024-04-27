@@ -1,11 +1,9 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Grid, Avatar, IconButton, Typography } from '@mui/material'
 import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
 import { auth } from "../firebase"
 import { useNavigate } from "react-router-dom";
 import signinwithgoogle from "../static/images/avatars/signinwithgoogle.png"
-import CreatePost from './CreatePost';
-// import { NavigationContainer } from '@react-navigation/native'; // For React Navigation
 
 
 const Signin = () => {
@@ -31,29 +29,33 @@ const Signin = () => {
                     setProfilePicUrl(user.photoURL);
                     setUserEmail(user.email);
                     setUserName(user.displayName);
+
                 }
+                localStorage.setItem('user', JSON.stringify({
+                    email: user.email,
+                    displayName: user.displayName,
+                    photoURL: user.photoURL
+                }));
                 console.log("userEmail:", user.email);
 
-                // Navigate to Posts component, passing user data in props
-                // navigate('/create-post', {
-                //     profilePicUrl: user.photoURL,
-                //     userEmail: user.email,
-                //     userName: user.displayName,
-                // });
-                // console.log('Profile picture URL:', profilePicUrl);
                 navigate("/", { state: { userEmail: user.email, userName: user.displayName, photoURL: user.photoURL } });
-                // navigate("/");
-                // navigate("/create-post");
 
-                // ...
             }).catch((error) => {
-                // Handle Errors here.
-                // const errorCode = error.code;
-                // const errorMessage = error.message;
                 console.log("error", error)
                 // ...
             });
     }
+
+    useEffect(() => {
+        const storedUser = localStorage.getItem('user');
+        if (storedUser) {
+            const user = JSON.parse(storedUser);
+            setProfilePicUrl(user.photoURL);
+            setUserEmail(user.email);
+            setUserName(user.displayName);
+            // Perform actions based on stored user data (optional)
+        }
+    }, []);
 
     return (
         <div className='background-image'>
@@ -72,8 +74,6 @@ const Signin = () => {
                         <Avatar src={signinwithgoogle} variant="square" sx={{ width: 175, height: 40 }} onClick={() => signIn(true)} />
                     </IconButton>
                 </Grid>
-
-                {/* <Button type="button" variant="contained" sx={{ width: 405 }} onClick={() => signIn(true)}>Sign in with Google</Button> */}
             </Grid>
         </div>
     )
