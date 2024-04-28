@@ -2,7 +2,7 @@
     "App": {
         "BaseDir": "{basePath}",
         "Mode": 0,
-        "Host": "0.0.0.0",
+        "Host": "https://promptopedia.onrender.com",
         "Port": 8000
     },
     "Database": {
