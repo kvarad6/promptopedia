@@ -16,7 +16,8 @@ configFile = "config/app.setting.json"
 configuration = readJson(configFile)
 
 if not firebase_admin._apps:
-    cred = credentials.Certificate(configuration["GCP"]["Credentials"])
+    # cred = credentials.Certificate(configuration["GCP"]["Credentials"])
+    cred = credentials.Certificate(configuration["Secrets"]["Render"])
     firebase_admin.initialize_app(cred)
 
 app = FastAPI()

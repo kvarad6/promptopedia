@@ -8,7 +8,8 @@
     "Database": {
         "CollectionName": "promptsCollection"
     },
-    "GCP": {
-        "Credentials": "config/promptopedia-credentials.json"
+    "Secrets": {
+        "Credentials": "config/promptopedia-credentials.json",
+        "Render": "/etc/secrets/promptopedia-credentials.json"
     }
 }
