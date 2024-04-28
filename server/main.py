@@ -22,7 +22,8 @@ if not firebase_admin._apps:
 
 app = FastAPI()
 
-origins = ["http://localhost:3000"]
+# origins = ["http://localhost:3000"]
+origins = ["promptopedia-8ol8drbua-varad-kulkarnis-projects.vercel.app"]
 
 app.add_middleware(GZipMiddleware, minimum_size=512)
 app.add_middleware(
