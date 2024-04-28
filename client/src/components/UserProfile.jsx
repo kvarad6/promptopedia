@@ -43,7 +43,8 @@ const UserProfile = () => {
 
   const HandleDelete = async (postId) => {
     try {
-      const baseUrl = 'http://0.0.0.0:8000/delete_post';
+      // const baseUrl = 'http://0.0.0.0:8000/delete_post';
+      const baseUrl = 'https://promptopedia.onrender.com/delete_post'
       const url = `${baseUrl}?postId=${postId}`;
       console.log("url:", url);
       const response = await axios.delete(url);
@@ -73,7 +74,7 @@ const UserProfile = () => {
         </Grid>
       </Grid>
 
-      <Grid sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 5, mt:5 }}>
+      <Grid sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 5, mt: 5 }}>
         <Grid item>
           <Typography variant="h4" align='center' sx={{ color: "white" }}>
             Posts

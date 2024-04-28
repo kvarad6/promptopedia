@@ -15,7 +15,8 @@ const Posts = ({ onPostCopy, copiedText }) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://0.0.0.0:8000/items');
+                // const response = await axios.get('http://0.0.0.0:8000/items');
+                const response = await axios.get('https://promptopedia.onrender.com/items')
                 setPosts(response.data);
             } catch (error) {
                 console.error('Error fetching data:', error);

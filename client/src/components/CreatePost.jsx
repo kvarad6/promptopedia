@@ -38,7 +38,10 @@ const CreatePost = () => {
                 photo,
             };
             console.log("data:", data)
-            const response = await axios.post('http://0.0.0.0:8000/items', data, {
+            // const response = await axios.post('http://0.0.0.0:8000/items', data, {
+            //     headers: { 'Content-Type': 'multipart/form-data' },
+            // });
+            const response = await axios.post('https://promptopedia.onrender.com/items', data, {
                 headers: { 'Content-Type': 'multipart/form-data' },
             });
 
