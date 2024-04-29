@@ -66,7 +66,7 @@ const Signin = () => {
                 <Grid item xs={4}>
                     <Grid sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3, color: 'white' }}>
                         <Typography variant='h4'>Discover & Share AI-Powered Prompts</Typography>
-                        <Typography variant='h8' sx={{ textAlign: 'center' }}>Promptopia is an open-source AI prompting tool for modern world to discover, create and share creative prompts</Typography>
+                        <Typography variant='h8' sx={{ textAlign: 'center' }}>Promptopedia is an AI prompting tool for modern world to discover, create and share creative prompts</Typography>
                     </Grid>
                 </Grid>
                 <Grid item xs={4}>
