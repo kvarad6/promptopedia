@@ -1,20 +1,34 @@
-# fastAPITemplate
+# Promptopedia - Backend Server
 
-This will be template to be used for all new fastAPI API projects
+- [1. Getting Started](#1-getting-started)
+	- [1.1. Create a virtual environment](#11-create-a-virtual-environment)
+	- [1.2. Install the dependencies](#12-install-the-dependencies)
+	- [1.3. Additional Steps](#13-additional-steps)
+- [2. Run in Local](#3-run-in-local)
 
-Getting started
-To make it easy for you to get started with application building here's a list of recommended next steps.
 
-```
-git clone https://github.com/suhaskekuda/fastAPITemplate.git
-cp -r fastAPITemplate <ProjectName>
-cd <ProjectName>
-rm -rf .git
-```
 
-Setup environment
-The below command will create a virtual environement, and upgrade pip to latest.
+# 1. Getting Started
+## 1.1. Create a virtual environment
+```bash
+cd server
+python3 -m venv venv
+source venv/bin/activate
 ```
-bin\setup.sh setup
+## 1.2. Install the dependencies
+```bash
+pip install -r requirements.txt
 ```
-Your are ready to code
+## 1.3. Additional Steps
+You might need to perform some additional steps, before a successful run, please read on to understand
+
+* Create firestore database and store DB name in .env
+* Add service account credentials file into the `config` folder.
+
+
+# 3. Run in Local
+
+* Run command -
+    ```bash
+    python3 main.py
+    ```
