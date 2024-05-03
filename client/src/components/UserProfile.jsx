@@ -25,10 +25,7 @@ const UserProfile = () => {
         // const baseUrl = 'http://0.0.0.0:8000/get_items_by_email';
         const baseUrl = 'https://promptopedia.onrender.com/get_items_by_email';
         const url = `${baseUrl}?email=${email}`; // Use template literals for string concatenation
-        console.log("url:", url)
         const response = await axios.get(url);
-        console.log("response.data:", response.data)
-        console.log("response.data[0].id:", response.data[0].id)
         if (response.data.error) { // Check for specific error property
           setPosts({ error: response.data.error }); // Set posts to an object with the error message
         } else {
@@ -47,7 +44,6 @@ const UserProfile = () => {
       // const baseUrl = 'http://0.0.0.0:8000/delete_post';
       const baseUrl = 'https://promptopedia.onrender.com/delete_post'
       const url = `${baseUrl}?postId=${postId}`;
-      console.log("url:", url);
       const response = await axios.delete(url);
       console.log("response:", response);
 
@@ -58,6 +54,14 @@ const UserProfile = () => {
       console.error('Error in deleting the data:', error);
     }
   };
+
+  const HandleEdit = async (postId, oldPrompt, oldTags) => {
+    try {
+      navigate("/edit-post", { state: { postId: postId, userEmail: location.state.userEmail, userName: location.state.userName, photoURL: location.state.photoURL, oldPrompt: oldPrompt, oldTags: oldTags } });
+    } catch (error) {
+      console.log("Error in editing the post")
+    }
+  }
 
   const handleCopy = (copiedText) => {
     setCopiedText(copiedText)
@@ -126,7 +130,7 @@ const UserProfile = () => {
                         </Grid>
                         <Grid item xs={4}>
                           <IconButton>
-                            <EditIcon />
+                            <EditIcon onClick={() => HandleEdit(post.id, post.prompt, post.tags)} />
                           </IconButton>
                         </Grid>
                         <Grid item xs={4}>
