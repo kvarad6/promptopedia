@@ -16,7 +16,7 @@ configFile = "config/app.setting.json"
 configuration = readJson(configFile)
 
 if not firebase_admin._apps:
-    # cred = credentials.Certificate(configuration["GCP"]["Credentials"])
+    # cred = credentials.Certificate(configuration["Secrets"]["Credentials"])
     cred = credentials.Certificate(configuration["Secrets"]["Render"])
     firebase_admin.initialize_app(cred)
 
@@ -92,11 +92,32 @@ async def get_items_by_email(email: str = Query(..., description="Email address 
         return {"error": "Item not found"}
 
 
-# @app.put("/items/{item_id}")
-# async def update_item(item_id: str, item: Item = Body(...)):
-#     doc_ref = firestore_db.collection(collection_name).document(item_id)
-#     await doc_ref.update(item.dict())
-#     return {"message": "Item updated successfully"}
+@app.get("/get_post_by_id/")
+async def get_post_by_id(postId: str = Query(..., description="Post Id to filter posts")):
+
+    print("post id:", postId)
+    print("inside get_post_by_id")
+    doc_ref = firestore_db.collection(collection_name).where(
+        "id", "==", postId)  # Using query operator
+    docs = doc_ref.get()  # Fetch multiple documents
+
+    if docs:
+        posts = [doc.to_dict() for doc in docs]
+        return posts
+    else:
+        return {"error": "Item not found"}
+
+
+@app.put("/update_post")
+async def update_post(postId: str = Query(..., description="Edit post by id"), updatedData: Item = Body(...)):
+    try:
+        updatedData = {"prompt": updatedData.prompt, "tags": updatedData.tags}
+        doc_ref = firestore_db.collection(collection_name).document(postId)
+        doc_ref.update(updatedData)
+        return {"message": "Item updated successfully"}
+    except Exception as e:
+        print(f"Error updating post: {e}")
+        return {"message": "Error updating post. Please try again later."}
 
 
 @app.delete("/delete_post/")
