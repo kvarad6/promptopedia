@@ -6,6 +6,7 @@ import Signin from './components/Signin';
 import CreatePost from './components/CreatePost';
 import Posts from './components/Posts'
 import UserProfile from './components/UserProfile';
+import EditPost from './components/EditPost';
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
           <Route path="/create-post" element={<CreatePost />} />
           <Route path="/posts" element={<Posts />} />
           <Route path="/user-profile" element={<UserProfile />} />
+          <Route path="/edit-post" element={<EditPost />} />
         </Routes>
       </Box>
     </div>
