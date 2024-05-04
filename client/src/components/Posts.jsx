@@ -11,6 +11,7 @@ const Posts = ({ onPostCopy, copiedText }) => {
     //destructuring prop
 
     const [posts, setPosts] = useState([]);
+    const [filteredPosts, setFilteredPosts] = useState([]); // State for filtered posts
 
     useEffect(() => {
         const fetchData = async () => {
@@ -18,12 +19,17 @@ const Posts = ({ onPostCopy, copiedText }) => {
                 // const response = await axios.get('http://0.0.0.0:8000/items');
                 const response = await axios.get('https://promptopedia.onrender.com/items')
                 setPosts(response.data);
+                setFilteredPosts(response.data); // Set initial filteredPosts to all posts
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
         };
         fetchData();
     }, []);
+
+    const handleSearch = (filteredData) => {
+        setFilteredPosts(filteredData);
+    };
 
     return (
         <>
@@ -33,10 +39,11 @@ const Posts = ({ onPostCopy, copiedText }) => {
                         Posts
                     </Typography>
                 </Grid>
-                {/* <SearchBar /> */}
+                <SearchBar posts={posts} onSearch={handleSearch} /> {/* Pass onSearch prop */}
                 <Grid item>
                     <ImageList variant="masonry" cols={3} gap={20} sx={{ rowGap: 10 }}>
-                        {posts.map((post) => (
+                        {filteredPosts.map((post) => (
+                            // ... map over filteredPosts to display posts
                             <Card key={post.id} sx={{ width: '300px', minHeight: '100px', mb: "1rem", backgroundImage: "linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%)" }}>
                                 <CardHeader
                                     avatar={
@@ -46,7 +53,7 @@ const Posts = ({ onPostCopy, copiedText }) => {
                                     title={post.name}
                                     subheader={post.email}
                                     action={
-                                        <CopyToClipboard text={post.prompt} onCopy={() => onPostCopy(post.prompt)} >
+                                        <CopyToClipboard text={post.prompt} onCopy={() => onPostCopy(post.prompt)}>
                                             <IconButton>
                                                 <ContentCopyRoundedIcon />
                                             </IconButton>
@@ -65,7 +72,6 @@ const Posts = ({ onPostCopy, copiedText }) => {
                                                     <span key={tag}>#  {tag} </span>
                                                 ))}
                                             </Typography>
-
                                         </Grid>
                                     </Grid>
                                 </CardContent>
@@ -75,8 +81,7 @@ const Posts = ({ onPostCopy, copiedText }) => {
                 </Grid>
             </Grid>
         </>
-
     );
 };
 
-export default Posts
+export default Posts;
