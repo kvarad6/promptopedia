@@ -1,39 +1,44 @@
-import React, { useState } from 'react'
-import { Typography, Grid, TextField, IconButton, Input, InputLabel } from '@mui/material'
-import SearchIcon from '@mui/icons-material/Search';
+import React, { useState } from 'react';
+import { Grid, TextField } from '@mui/material'
 
 
-const SearchBar = ({ onSearch }) => {
+const SearchBar = ({ posts, onSearch }) => {
   const [searchTerm, setSearchTerm] = useState('');
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
-    console.log(event.target.value)
-    if (onSearch) { // Call onSearch prop function if provided
-      onSearch(event.target.value);
+    // Call onSearch prop with filtered posts if provided
+    if (onSearch) {
+      const filteredPosts = posts.filter((post) =>
+        post.prompt.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      onSearch(filteredPosts);
     }
   };
 
   return (
-    <Grid sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', mt: 5 }}>
-      <form noValidate autoComplete="off">
+    <Grid sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
+      <form>
         <TextField
           id="search"
-          label="Search"
-          variant="outlined"
+          label="Search Posts"
           value={searchTerm}
           onChange={handleSearchChange}
-          InputProps={{
-            endAdornment: (
-              <IconButton onClick={handleSearchChange}>
-                <SearchIcon />
-              </IconButton>
-            )
+          sx={{
+            "& .MuiOutlinedInput-root": {
+              "& fieldset": {
+                borderColor: "white"              }
+            },
+            width: 500
+          }}
+          inputProps={{ style: { color: "white" } }}
+          InputLabelProps={{
+            style: { color: '#fff' },
           }}
         />
       </form>
     </Grid>
-  )
-}
+  );
+};
 
-export default SearchBar
+export default SearchBar;
