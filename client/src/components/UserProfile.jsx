@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Grid, Typography, Card, CardHeader, Avatar, CardContent, IconButton, ImageList } from '@mui/material'
+import { Grid, Typography, Card, CardHeader, Avatar, CardContent, IconButton, ImageList, useTheme, useMediaQuery } from '@mui/material'
 import { useNavigate, useLocation, } from 'react-router-dom';
 import axios from 'axios';
 import { CopyToClipboard } from "react-copy-to-clipboard";
@@ -66,86 +66,157 @@ const UserProfile = () => {
   const handleCopy = (copiedText) => {
     setCopiedText(copiedText)
   }
+
+  const theme = useTheme();
+  const isMatch = useMediaQuery(theme.breakpoints.down('md'));
+
   return (
     <div className='background-image'>
       <Header />
 
-      <Grid sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 5, ml: 30, mt: 10 }}>
+      <Grid sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 5, ml: { xs: 5, md: 30, lg: 30 }, mt: 10 }}>
         <Grid item xs={6}>
-          <Typography variant='h2' sx={{ color: 'white' }}>My Profile</Typography>
+          <Typography sx={{ color: 'white', fontSize: { xs: 40, md: 50, lg: 70 } }}>My Profile</Typography>
         </Grid>
         <Grid item xs={6}>
-          <Typography variant='h6' sx={{ color: 'white' }}>Welcome to your personalized profile page!</Typography>
+          <Typography sx={{ color: 'white', fontSize: { xs: 16, md: 20, lg: 23 } }}>Welcome to your personalized profile page!</Typography>
         </Grid>
       </Grid>
 
       <Grid sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 5, mt: 5 }}>
         <Grid item>
-          <Typography variant="h4" align='center' sx={{ color: "white" }}>
+          <Typography align='center' sx={{ color: "white", fontSize: { xs: 25, md: 35, lg: 35 } }}>
             Posts
           </Typography>
         </Grid>
-        <Grid item>
-          {posts.error && (
-            <Typography variant="h6" align='center' sx={{ color: "white" }}>
-              No posts found for your email.
-            </Typography>
-          )}
-          {posts.length > 0 && (
-            <ImageList variant="masonry" cols={3} gap={20} sx={{ rowGap: 10 }}>
-              {posts.map((post) => (
-                <Card key={post.id} sx={{
-                  width: '300px', minHeight: '100px', mb: "1rem", backgroundImage: "linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%)"
-                }}>
-                  <CardHeader
-                    avatar={
-                      <Avatar src={post.photo} sx={{ bgcolor: "black" }} aria-label="recipe"></Avatar>
-                    }
-                    title={post.name}
-                    subheader={post.email}
-                  />
+        {
+          isMatch ? (
+            <Grid item>
+              {posts.error && (
+                <Typography variant="h6" align='center' sx={{ color: "white" }}>
+                  No posts found for your email.
+                </Typography>
+              )}
+              {posts.length > 0 && (
+                <ImageList variant="masonry" cols={1} gap={20} sx={{ rowGap: 10 }}>
+                  {posts.map((post) => (
+                    <Card key={post.id} sx={{
+                      width: { xs: 320, md: 300, lg: 300 }, minHeight: '100px', mb: "1rem", backgroundImage: "linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%)"
+                    }}>
+                      <CardHeader
+                        avatar={
+                          <Avatar src={post.photo} sx={{ bgcolor: "black" }} aria-label="recipe"></Avatar>
+                        }
+                        title={post.name}
+                        subheader={post.email}
+                      />
 
-                  {/* Add CardMedia if you have image URLs in your data */}
-                  {/* <CardMedia image={post.imageUrl} title={post.prompt} /> */}
-                  <CardContent>
-                    <Grid sx={{ display: 'flex', flexDirection: 'column', alignItems: 'space-between', gap: 2 }}>
-                      <Grid item xs={4}>
-                        <Typography variant="body1">{post.prompt}</Typography>
-                      </Grid>
-                      <Grid item xs={4}>
-                        <Typography variant="body2">
-                          {/* Tags: {post.tags.join(', ')} */}
-                          {post.tags.map((tag) => (
-                            <span key={tag}>#  {tag} </span>
-                          ))}
-                        </Typography>
-                      </Grid>
-                      <Grid item xs={4} sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
-                        <Grid item xs={4}>
-                          <CopyToClipboard text={post.prompt} onCopy={() => handleCopy(post.prompt)}>
-                            <IconButton>
-                              <ContentCopyRoundedIcon />
-                            </IconButton>
-                          </CopyToClipboard>
+                      {/* Add CardMedia if you have image URLs in your data */}
+                      {/* <CardMedia image={post.imageUrl} title={post.prompt} /> */}
+                      <CardContent>
+                        <Grid sx={{ display: 'flex', flexDirection: 'column', alignItems: 'space-between', gap: 2 }}>
+                          <Grid item xs={4}>
+                            <Typography sx={{ fontSize: 15 }}>{post.prompt}</Typography>
+                          </Grid>
+                          <Grid item xs={4}>
+                            <Typography variant="body2">
+                              {/* Tags: {post.tags.join(', ')} */}
+                              {post.tags.map((tag) => (
+                                <span key={tag}>#  {tag} </span>
+                              ))}
+                            </Typography>
+                          </Grid>
+                          <Grid item xs={4} sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
+                            <Grid item xs={4}>
+                              <CopyToClipboard text={post.prompt} onCopy={() => handleCopy(post.prompt)}>
+                                <IconButton>
+                                  <ContentCopyRoundedIcon />
+                                </IconButton>
+                              </CopyToClipboard>
+                            </Grid>
+                            <Grid item xs={4}>
+                              <IconButton>
+                                <EditIcon onClick={() => HandleEdit(post.id, post.prompt, post.tags)} />
+                              </IconButton>
+                            </Grid>
+                            <Grid item xs={4}>
+                              <IconButton>
+                                <DeleteIcon onClick={() => HandleDelete(post.id)} />
+                              </IconButton>
+                            </Grid>
+                          </Grid>
                         </Grid>
-                        <Grid item xs={4}>
-                          <IconButton>
-                            <EditIcon onClick={() => HandleEdit(post.id, post.prompt, post.tags)} />
-                          </IconButton>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </ImageList>
+              )}
+            </Grid>
+          ) : (
+            <Grid item>
+              {posts.error && (
+                <Typography variant="h6" align='center' sx={{ color: "white" }}>
+                  No posts found for your email.
+                </Typography>
+              )}
+              {posts.length > 0 && (
+                <ImageList variant="masonry" cols={3} gap={20} sx={{ rowGap: 10 }}>
+                  {posts.map((post) => (
+                    <Card key={post.id} sx={{
+                      width: '300px', minHeight: '100px', mb: "1rem", backgroundImage: "linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%)"
+                    }}>
+                      <CardHeader
+                        avatar={
+                          <Avatar src={post.photo} sx={{ bgcolor: "black" }} aria-label="recipe"></Avatar>
+                        }
+                        title={post.name}
+                        subheader={post.email}
+                      />
+
+                      {/* Add CardMedia if you have image URLs in your data */}
+                      {/* <CardMedia image={post.imageUrl} title={post.prompt} /> */}
+                      <CardContent>
+                        <Grid sx={{ display: 'flex', flexDirection: 'column', alignItems: 'space-between', gap: 2 }}>
+                          <Grid item xs={4}>
+                            <Typography variant="body1">{post.prompt}</Typography>
+                          </Grid>
+                          <Grid item xs={4}>
+                            <Typography variant="body2">
+                              {/* Tags: {post.tags.join(', ')} */}
+                              {post.tags.map((tag) => (
+                                <span key={tag}>#  {tag} </span>
+                              ))}
+                            </Typography>
+                          </Grid>
+                          <Grid item xs={4} sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
+                            <Grid item xs={4}>
+                              <CopyToClipboard text={post.prompt} onCopy={() => handleCopy(post.prompt)}>
+                                <IconButton>
+                                  <ContentCopyRoundedIcon />
+                                </IconButton>
+                              </CopyToClipboard>
+                            </Grid>
+                            <Grid item xs={4}>
+                              <IconButton>
+                                <EditIcon onClick={() => HandleEdit(post.id, post.prompt, post.tags)} />
+                              </IconButton>
+                            </Grid>
+                            <Grid item xs={4}>
+                              <IconButton>
+                                <DeleteIcon onClick={() => HandleDelete(post.id)} />
+                              </IconButton>
+                            </Grid>
+                          </Grid>
                         </Grid>
-                        <Grid item xs={4}>
-                          <IconButton>
-                            <DeleteIcon onClick={() => HandleDelete(post.id)} />
-                          </IconButton>
-                        </Grid>
-                      </Grid>
-                    </Grid>
-                  </CardContent>
-                </Card>
-              ))}
-            </ImageList>
-          )}
-        </Grid>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </ImageList>
+              )}
+            </Grid>
+          )
+        }
+
       </Grid>
     </div>
   )

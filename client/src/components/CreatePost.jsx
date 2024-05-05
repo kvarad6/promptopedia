@@ -85,17 +85,17 @@ const CreatePost = () => {
         <div className='background-image'>
             <Header />
 
-            <Grid sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', mt: 10, ml: 20, gap: 5 }}>
+            <Grid sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', mt: 10, ml: { xs: 5, md: 20, lg: 20 }, gap: 5 }}>
                 <Grid item>
-                    <Typography variant='h2' sx={{ color: 'white' }}>Create Post</Typography>
+                    <Typography sx={{ color: 'white', fontSize: { xs: 40, md: 50, lg: 70 } }}>Create Post</Typography>
                 </Grid>
                 <Grid item>
-                    <Typography variant='h6' sx={{ color: 'white' }}>Create and share amazing prompts with the world and let your imagination run wild with any AI-powered platform.</Typography>
+                    <Typography sx={{ color: 'white', fontSize: { xs: 16, md: 20, lg: 22 } }}>Create and share amazing prompts with the world and let your imagination run wild with any AI-powered platform.</Typography>
                 </Grid>
             </Grid>
             <form onSubmit={handleSubmit}>
-                <FormControl sx={{ display: 'flex', flexDirection: 'column', mb: 2, ml: 20, mr: 10, mt: 5, width: 400, gap: 4 }}>
-                    <FormLabel sx={{ color: 'white', fontSize: 25 }}>
+                <FormControl sx={{ display: 'flex', flexDirection: 'column', mb: 2, ml: { xs: 5, md: 20, lg: 20 }, mr: { xs: 0, md: 10, lg: 10 }, mt: 5, width: { xs: 300, md: 300, lg: 400 }, gap: 4 }}>
+                    <FormLabel sx={{ color: 'white', fontSize: { xs: 20, md: 20, lg: 25 } }}>
                         Prompt
                     </FormLabel>
                     <TextField
@@ -116,14 +116,14 @@ const CreatePost = () => {
                             '& label.Mui-focused': {
                                 color: 'white',
                             },
-                            width: 600
+                            width: { xs: 300, md: 500, lg: 600 }
                         }}
                         inputProps={{ style: { color: "white" } }}
                         value={formData.prompt}
                         onChange={handleChange}
                         required
                     />
-                    <FormLabel sx={{ color: 'white', fontSize: 25 }}>
+                    <FormLabel sx={{ color: 'white', fontSize: { xs: 20, md: 20, lg: 25 } }}>
                         Tags*
                     </FormLabel>
                     <TextField
@@ -136,7 +136,7 @@ const CreatePost = () => {
                                     borderColor: "white"
                                 }
                             },
-                            width: 600
+                            width: { xs: 300, md: 500, lg: 600 }
                         }}
                         inputProps={{ style: { color: "white" } }}
                         value={formData.tags}
@@ -150,7 +150,7 @@ const CreatePost = () => {
                             </Button>
                         </Grid>
                         <Grid item xs={6}>
-                            <Typography sx={{ color: 'white', fontSize: 12, mr: 15 }}>*Comma seperated</Typography>
+                            <Typography sx={{ color: 'white', fontSize: 12 }}>*Comma seperated</Typography>
                         </Grid>
                     </Grid>
                 </FormControl>

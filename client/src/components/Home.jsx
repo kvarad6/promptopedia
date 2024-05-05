@@ -25,10 +25,10 @@ const Home = () => {
             <div className="content-wrapper">
                 <Grid sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6, mt: 10 }}>
                     <Grid item xs={4}>
-                        <Typography variant='h3' sx={{ color: 'white' }}>Discover & Share AI-Powered Prompts</Typography>
+                        <Typography sx={{ color: 'white', fontSize: { xs: 23, md: 25, lg: 50 }, ml:{xs:10}, mr:{xs:10} }}>Discover & Share AI-Powered Prompts</Typography>
                     </Grid>
                     <Grid item xs={4}>
-                        <Typography variant='h6' sx={{ color: 'white' }}>Promptopia is an open-source AI prompting tool for modern world to discover, create and share creative prompts</Typography>
+                        <Typography sx={{ color: 'white', fontSize: { xs: 17, md: 23, lg: 23 }, ml: { xs: 10 }, mr: { xs: 10 } }}>Promptopedia is an AI prompting tool for modern world to discover, create and share creative prompts</Typography>
                     </Grid>
                     <Grid item xs={4}>
                         <Posts onPostCopy={handleCopy} copiedText={copiedText} />

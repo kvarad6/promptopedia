@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import { onAuthStateChanged, signOut } from 'firebase/auth'
-import { Button } from '@mui/material'
+import { Button, useTheme, useMediaQuery, IconButton } from '@mui/material'
 import { auth } from "../firebase"
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
 const Signout = () => {
 
@@ -43,18 +44,30 @@ const Signout = () => {
 
     const navigate = useNavigate();
 
+    const theme = useTheme();
+    const isMatch = useMediaQuery(theme.breakpoints.down('md'));
+
     return (
         <div>
             {/* {authUser ? <><p>{`Signed in as ${authUser.email}`}</p><Button variant="contained" onClick={userSignout}>Sign Out</Button></> : <p></p>} */}
-            <Button
-                variant="outlined"
-                sx={{
-                    borderRadius: 10, mt: 1, textTransform: 'none', color: 'white', borderColor: '#5CD2E6', '&:hover': {
-                        backgroundColor: '#208be8', boxShadow: 'none'
-                    }
-                }}
-                onClick={userSignout}>Sign Out</Button>
-        </div>
+            {
+                isMatch ? (
+                    <IconButton>
+                        <ExitToAppIcon onClick={userSignout} fontSize="large" sx={{ color: '#5CD2E6' }} />
+                    </IconButton>
+                ) : (
+                    <Button
+                        variant="outlined"
+                        sx={{
+                            borderRadius: 10, mt: 1, textTransform: 'none', color: 'white', borderColor: '#5CD2E6', '&:hover': {
+                                backgroundColor: '#208be8', boxShadow: 'none'
+                            }
+                        }}
+                        onClick={userSignout}>Sign Out</Button>
+                )
+            }
+
+        </div >
     )
 }
 

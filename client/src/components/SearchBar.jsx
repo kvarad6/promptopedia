@@ -29,7 +29,7 @@ const SearchBar = ({ posts, onSearch }) => {
               "& fieldset": {
                 borderColor: "white"              }
             },
-            width: 500
+            width: { xs:320, md:400, lg: 500 }
           }}
           inputProps={{ style: { color: "white" } }}
           InputLabelProps={{

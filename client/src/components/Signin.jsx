@@ -59,14 +59,14 @@ const Signin = () => {
 
     return (
         <div className='background-image'>
-            <Grid sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', ml: 30, mr: 30, mt: 25, gap: 5 }}>
+            <Grid sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', ml: { xs: 10, md: 15, lg: 30 }, mr: { xs: 10, md: 15, lg: 30 }, mt: { xs: 18, md: 25, lg: 25 }, gap: { xs: 5, md: 10, lg: 5 } }}>
                 <Grid item xs={4}>
-                    <Typography variant='h1' sx={{ color: 'white' }}>Promptopedia</Typography>
+                    <Typography sx={{ color: 'white', fontSize: {xs: 45, md:95, lg:105} }}>Promptopedia</Typography>
                 </Grid>
                 <Grid item xs={4}>
-                    <Grid sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3, color: 'white' }}>
-                        <Typography variant='h4'>Discover & Share AI-Powered Prompts</Typography>
-                        <Typography variant='h8' sx={{ textAlign: 'center' }}>Promptopedia is an AI prompting tool for modern world to discover, create and share creative prompts</Typography>
+                    <Grid sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: { xs: 4, md: 8, lg: 4 }, color: 'white' }}>
+                        <Typography sx={{ textAlign: 'center', fontSize: { xs: 25, md: 45, lg: 45 } }}>Discover & Share AI-Powered Prompts</Typography>
+                        <Typography sx={{ textAlign: 'center', fontSize: { xs: 15, md: 25, lg: 20 } }}>Promptopedia is an AI prompting tool for modern world to discover, create and share creative prompts</Typography>
                     </Grid>
                 </Grid>
                 <Grid item xs={4}>
