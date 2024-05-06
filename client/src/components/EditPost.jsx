@@ -53,14 +53,14 @@ const EditPost = () => {
 
     return (
         <>
-            <Grid sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', mt: 10, ml: 20 }}>
+            <Grid sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', mt: 10, ml: { xs: 5, md: 20, lg: 20 } }}>
                 <Grid item>
-                    <Typography variant='h3' sx={{ color: 'white' }}>Update Post</Typography>
+                    <Typography sx={{ color: 'white', fontSize: { xs: 40, md: 50, lg: 70 } }}>Update Post</Typography>
                 </Grid>
             </Grid>
             <form onSubmit={handleEditPost}>
-                <FormControl sx={{ display: 'flex', flexDirection: 'column', mb: 2, ml: 20, mr: 10, width: 400, gap: 4 }}>
-                    <FormLabel sx={{ color: 'white', fontSize: 25 }}>
+                <FormControl sx={{ display: 'flex', flexDirection: 'column', mb: 2, ml: { xs: 5, md: 20, lg: 20 }, mr: { xs: 0, md: 10, lg: 10 }, width: { xs: 300, md: 300, lg: 400 }, gap: 4 }}>
+                    <FormLabel sx={{ color: 'white', fontSize: { xs: 20, md: 20, lg: 25 } }}>
                         Prompt
                     </FormLabel>
                     <TextField
@@ -81,7 +81,7 @@ const EditPost = () => {
                             '& label.Mui-focused': {
                                 color: 'white',
                             },
-                            width: 600
+                            width: { xs: 300, md: 500, lg: 600 }
                         }}
                         inputProps={{ style: { color: "white" } }}
                         // value={postData.prompt}
@@ -89,7 +89,7 @@ const EditPost = () => {
                         defaultValue={oldPrompt}
                         required
                     />
-                    <FormLabel sx={{ color: 'white', fontSize: 25 }}>
+                    <FormLabel sx={{ color: 'white', fontSize: { xs: 20, md: 20, lg: 25 } }}>
                         Tags*
                     </FormLabel>
                     <TextField
@@ -102,7 +102,7 @@ const EditPost = () => {
                                     borderColor: "white"
                                 }
                             },
-                            width: 600
+                            width: { xs: 300, md: 500, lg: 600 }
                         }}
                         inputProps={{ style: { color: "white" } }}
                         // value={postData.tags}
@@ -119,7 +119,7 @@ const EditPost = () => {
                             </Button>
                         </Grid>
                         <Grid item xs={6}>
-                            <Typography sx={{ color: 'white', fontSize: 12, mr: 15 }}>*Comma seperated</Typography>
+                            <Typography sx={{ color: 'white', fontSize: 12}}>*Comma seperated</Typography>
                         </Grid>
                     </Grid>
                 </FormControl>
