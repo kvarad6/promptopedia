@@ -28,7 +28,7 @@ const CreatePost = () => {
         console.log('formData:', formData);
 
         try {
-            // const response = await axios.post('http://0.0.0.0:8000/items', formData, {
+            // const response = await axios.post('http://0.0.0.0:8000/posts', formData, {
             //     headers: { 'Content-Type': 'multipart/form-data' },
             // });
             const data = {
@@ -38,10 +38,10 @@ const CreatePost = () => {
                 photo,
             };
             console.log("data:", data)
-            // const response = await axios.post('http://0.0.0.0:8000/items', data, {
+            // const response = await axios.post('http://0.0.0.0:8000/posts', data, {
             //     headers: { 'Content-Type': 'multipart/form-data' },
             // });
-            const response = await axios.post('https://promptopedia.onrender.com/items', data, {
+            const response = await axios.post('https://promptopedia.onrender.com/posts', data, {
                 headers: { 'Content-Type': 'multipart/form-data' },
             });
 

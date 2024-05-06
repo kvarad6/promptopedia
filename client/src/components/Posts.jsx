@@ -16,8 +16,8 @@ const Posts = ({ onPostCopy, copiedText }) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                // const response = await axios.get('http://0.0.0.0:8000/items');
-                const response = await axios.get('https://promptopedia.onrender.com/items')
+                // const response = await axios.get('http://0.0.0.0:8000/posts');
+                const response = await axios.get('https://promptopedia.onrender.com/posts')
                 setPosts(response.data);
                 setFilteredPosts(response.data); // Set initial filteredPosts to all posts
             } catch (error) {
