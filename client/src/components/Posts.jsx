@@ -20,8 +20,8 @@ const Posts = ({ onPostCopy, copiedText }) => {
         const fetchData = async () => {
             setLoading(true);
             try {
-                const response = await axios.get('http://0.0.0.0:8000/posts');
-                // const response = await axios.get('https://promptopedia.onrender.com/posts')
+                // const response = await axios.get('http://0.0.0.0:8000/posts');
+                const response = await axios.get('https://promptopedia.onrender.com/posts')
                 setPosts(response.data);
                 setFilteredPosts(response.data); // Set initial filteredPosts to all posts
             } catch (error) {

@@ -24,8 +24,8 @@ const UserProfile = () => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const baseUrl = 'http://0.0.0.0:8000/get_items_by_email';
-        // const baseUrl = 'https://promptopedia.onrender.com/get_items_by_email';
+        // const baseUrl = 'http://0.0.0.0:8000/get_items_by_email';
+        const baseUrl = 'https://promptopedia.onrender.com/get_items_by_email';
         const url = `${baseUrl}?email=${email}`; // Use template literals for string concatenation
         const response = await axios.get(url);
         if (response.data.error) { // Check for specific error property
